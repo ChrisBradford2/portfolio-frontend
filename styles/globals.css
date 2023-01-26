@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.dark .socialbtn {
-  @apply bg-gray-800;
+@layer components {
+  .socialbtn {
+    @apply flex h-10 w-10 items-center justify-center rounded-lg hover:bg-gradient-to-r hover:from-orange-400 hover:to-red-500 hover:text-white;
+  }
 }
 
-.socialbtn {
-  @apply flex h-10 w-10 items-center justify-center rounded-lg hover:bg-gradient-to-r hover:from-orange-400 hover:to-red-500 hover:text-white;
+html {
+    color-scheme: dark;
+}
+
+.dark .dark\:bg-homeTwoBg-dark {
+    background-image: url('https://bostami-next.vercel.app/images/background/bgtwo.jpg');
 }

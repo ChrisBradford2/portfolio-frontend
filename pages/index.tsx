@@ -3,6 +3,7 @@ import { Inter } from "@next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import ProfileCard from "@/components/ProfileCard";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,43 +41,9 @@ const Home = ({
       </Head>
 
       <main className="bg-homeBg min-h-screen bg-no-repeat bg-center bg-cover bg-fixed dark:bg-homeTwoBg-dark md:pb-16 w-full">
-        <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:mt-[220px]">
+        <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:pt-[220px]">
           <ProfileCard profile={profile} env={env} />
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            {data.attributes.title}
-          </h1>
-          <p>{data.description}</p>
-          <h2>{body.title}</h2>
-          {body.icon && <p>{body.icon}</p>}
-          <p>{body.body}</p>
-          <Link
-            href={`${env}${body.resume.data.attributes.url}`}
-            title={body.resume.data.attributes.name || null}
-          >
-            {body.title_resume}
-          </Link>
-          <h2>{data.attributes.school_title}</h2>
-          {school.map((school: any) => (
-            <div key={school.id}>
-              <h3>{school.school_name}</h3>
-              <p>{school.start_date}</p>
-              <p>{school.end_date || "Present"}</p>
-              <p>{school.grade_name}</p>
-              {school.comment.map((comment: any) => (
-                <p key={comment.id}>{comment.comment}</p>
-              ))}
-            </div>
-          ))}
-          <h2>{data.attributes.professional_experience_title}</h2>
-          {professional_experience.map((professional_experience: any) => (
-            <div key={professional_experience.id}>
-              <h3>{professional_experience.company_name}</h3>
-              <p>{professional_experience.start_date}</p>
-              <p>{professional_experience.end_date || "Present"}</p>
-              <p>{professional_experience.job_title}</p>
-              {professional_experience.comment}
-            </div>
-          ))}
+          <Navbar />
         </div>
       </main>
     </>

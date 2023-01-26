@@ -19,7 +19,6 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ profile, env }) => {
-	/*
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("fr-FR");
   };
@@ -34,9 +33,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, env }) => {
     }
     return age;
   };
-	*/
 
-  const birthday = ` ans`;
+  const birthday = `${getAge(profile.birthday)} ans`; // 01/01/2000 (21 ans)
 
   return (
     <div className="col-span-12 lg:col-span-4 lg:h-screen lg:sticky top-44">
@@ -65,7 +63,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, env }) => {
                 {...(link.isBlank && { target: "_blank" })}
 								key={link.id}
               >
-                <span className="socialbtn text-[#44566C] dark:text-[#A6A6A6]">
+                <span className="socialbtn text-[#44566C] dark:text-[#A6A6A6] bg-[#F3F6F6] dark:bg-[#1D1D1D]">
                   <FaGithub />
                 </span>
               </Link>
@@ -111,7 +109,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, env }) => {
                   Email
                 </p>
                 <p className="dark:text-white break-all">
-                  <Link href={`mailto:${profile.mail}`} title="Email">
+                  <Link href={`mailto:${profile.mail}`} title="Email" className="hover:text-[#FA5252] duration-300 transition">
                     {profile.mail}
                   </Link>
                 </p>
