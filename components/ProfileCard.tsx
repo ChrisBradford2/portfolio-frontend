@@ -11,7 +11,6 @@ import {
   MdDownload,
 } from "react-icons/md";
 import { FaLinkedin, FaGithub, FaTwitter, FaFacebook } from "react-icons/fa";
-import { useEffect, useState } from "react";
 
 interface ProfileCardProps {
   profile: any;
@@ -49,7 +48,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, env }) => {
           className="w-[240px] absolute left-[50%] transform -translate-x-[50%] h-[240px] drop-shadow-xl mx-auto rounded-[20px] -mt-[140px]"
         />
         <div className="pt-[100px] pb-8">
-          <h1 className="mt-6 mb-1 text-5xl font-semibold dark:text-white">
+          <h1 className="mt-6 mb-1 text-4xl font-semibold dark:text-white">
             {profile.title}
           </h1>
           <p className="mb-4 text-[#7B7B7B] inline-block dark:bg-[#1D1D1D] px-5 py-1.5 rounded-lg dark:text-[#A6A6A6] ">

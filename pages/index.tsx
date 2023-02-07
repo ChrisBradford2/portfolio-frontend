@@ -15,6 +15,7 @@ interface Props {
   school: any;
   professional_experience: any;
   profile: any;
+  skills: any;
   env: string;
   seo: any;
 }
@@ -23,6 +24,7 @@ const Home = ({
   data,
   body,
   profile,
+  skills,
   env,
   seo,
 }: Props) => {
@@ -47,7 +49,7 @@ const Home = ({
             <Navbar />
             <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
               <div data-aos="fade" className="aos-init aos-animate">
-                <Body body={body} />
+                <Body body={body} skills={skills} skills_title={data.skills_title} />
               </div>
             </div>
           </div>
@@ -59,7 +61,7 @@ const Home = ({
 
 // Get data from Strapi with the token from the environment variable
 Home.getInitialProps = async () => {
-  const query = `?populate[]=seo&populate[]=profile.avatar&populate[]=profile.resume&populate[]=body`;
+  const query = `?populate[]=seo&populate[]=profile.avatar&populate[]=profile.resume&populate[]=body&populate[]=skills&populate[]=skills.skill`;
   const res = await fetch(`${process.env.API_URL}/api/homepage${query}`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
@@ -70,13 +72,15 @@ Home.getInitialProps = async () => {
   const seo = data.data.attributes.seo;
   const body = data.data.attributes.body;
   const profile = data.data.attributes.profile;
+  const skills = data.data.attributes.skills;
   const env = process.env.API_URL;
 
   return {
-    data: data.data,
+    data: data.data.attributes,
     error: error,
     body: body,
     profile: profile,
+    skills: skills,
     env: env,
     seo: seo,
   };
