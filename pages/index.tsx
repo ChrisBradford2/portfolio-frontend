@@ -16,7 +16,6 @@ interface Props {
   professional_experience: any;
   profile: any;
   skills: any;
-  env: string;
   seo: any;
 }
 
@@ -25,7 +24,6 @@ const Home = ({
   body,
   profile,
   skills,
-  env,
   seo,
 }: Props) => {
   return (
@@ -44,12 +42,12 @@ const Home = ({
 
       <main className="bg-homeBg min-h-screen bg-no-repeat bg-center bg-cover bg-fixed dark:bg-homeTwoBg-dark md:pb-16 w-full">
         <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:pt-[220px]">
-          <ProfileCard profile={profile} env={env} />
+          <ProfileCard profile={profile} />
           <div className="col-span-12 lg:col-span-8">
             <Navbar />
             <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
               <div data-aos="fade" className="aos-init aos-animate">
-                <Body body={body} skills={skills} skills_title={data.skills_title} />
+                <Body body={body} skills={skills} skills_title={data.data.attributes.skills_title} />
               </div>
             </div>
           </div>
@@ -60,8 +58,8 @@ const Home = ({
 };
 
 // Get data from Strapi with the token from the environment variable
-Home.getInitialProps = async () => {
-  const query = `?populate[]=seo&populate[]=profile.avatar&populate[]=profile.resume&populate[]=body&populate[]=skills&populate[]=skills.skill`;
+export const getStaticProps = async () => {
+  const query = `?populate[]=seo&populate[]=body&populate[]=skills&populate[]=skills.skill`;
   const res = await fetch(`${process.env.API_URL}/api/homepage${query}`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
@@ -71,18 +69,16 @@ Home.getInitialProps = async () => {
   const error = data.error || null;
   const seo = data.data.attributes.seo;
   const body = data.data.attributes.body;
-  const profile = data.data.attributes.profile;
   const skills = data.data.attributes.skills;
-  const env = process.env.API_URL;
 
   return {
-    data: data.data.attributes,
-    error: error,
-    body: body,
-    profile: profile,
-    skills: skills,
-    env: env,
-    seo: seo,
+    props: {
+      data,
+      error,
+      body,
+      skills,
+      seo,
+    },
   };
 };
 
