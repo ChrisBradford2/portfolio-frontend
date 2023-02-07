@@ -10,7 +10,7 @@ import {
   MdCalendarToday,
   MdDownload,
 } from "react-icons/md";
-import { FaLinkedin, FaGithub, FaTwitter, FaFacebook } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaTwitter, FaFacebook, FaGitlab, FaDrupal } from "react-icons/fa";
 
 interface ProfileCardProps {
   profile: any;
@@ -62,6 +62,36 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, env }) => {
           >
             <span className="socialbtn text-[#44566C] dark:text-[#A6A6A6] bg-[#F3F6F6] dark:bg-[#1D1D1D]">
               <FaGithub />
+            </span>
+          </Link>
+
+          <Link
+            href={profile.link_gitlab}
+            title="Gitlab"
+            target="_blank"
+          >
+            <span className="socialbtn text-[#44566C] dark:text-[#A6A6A6] bg-[#F3F6F6] dark:bg-[#1D1D1D]">
+              <FaGitlab />
+            </span>
+          </Link>
+
+          <Link
+            href={profile.link_linkedin}
+            title="Linkedin"
+            target="_blank"
+          >
+            <span className="socialbtn text-[#44566C] dark:text-[#A6A6A6] bg-[#F3F6F6] dark:bg-[#1D1D1D]">
+              <FaLinkedin />
+            </span>
+          </Link>
+
+          <Link
+            href={profile.link_drupal}
+            title="Drupal"
+            target="_blank"
+          >
+            <span className="socialbtn text-[#44566C] dark:text-[#A6A6A6] bg-[#F3F6F6] dark:bg-[#1D1D1D]">
+              <FaDrupal />
             </span>
           </Link>
           </div>
