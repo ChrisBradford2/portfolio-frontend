@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProfileCard from "@/components/ProfileCard";
 import Navbar from "@/components/Navbar";
+import Body from "@/components/Body";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,35 +16,41 @@ interface Props {
   professional_experience: any;
   profile: any;
   env: string;
-  meta: any;
+  seo: any;
 }
 
 const Home = ({
   data,
   body,
-  school,
-  professional_experience,
   profile,
   env,
-  meta,
+  seo,
 }: Props) => {
   return (
     <>
       <Head>
-        <title>{meta.meta_title}</title>
+        <title>{seo.metaTitle}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <meta name="viewport" content={meta.meta_viewport} />
-        <meta name="description" content={meta.meta_description} />
-        <meta name="keywords" content={meta.meta_keywords} />
-        <meta name="author" content={meta.meta_author} />
-        <meta name="robots" content={meta.meta_robots} />
+        <link rel="canonical" href={seo.canonicalURL} />
+        <meta name="viewport" content={seo.metaViewport} />
+        <meta name="description" content={seo.metaDescription} />
+        <meta name="keywords" content={seo.keywords} />
+        <meta name="author" content={seo.metaAuthor} />
+        <meta name="robots" content={seo.metaRobots} />
       </Head>
 
       <main className="bg-homeBg min-h-screen bg-no-repeat bg-center bg-cover bg-fixed dark:bg-homeTwoBg-dark md:pb-16 w-full">
         <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:pt-[220px]">
           <ProfileCard profile={profile} env={env} />
-          <Navbar />
+          <div className="col-span-12 lg:col-span-8">
+            <Navbar />
+            <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
+              <div data-aos="fade" className="aos-init aos-animate">
+                <Body body={body} />
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </>
@@ -52,7 +59,7 @@ const Home = ({
 
 // Get data from Strapi with the token from the environment variable
 Home.getInitialProps = async () => {
-  const query = `?populate[]=profile_picture&populate[]=background_image&populate[]=sub_title&populate[]=body.resume&populate[]=school.comment&populate[]=professional_experience&populate[]=meta&populate[]=profile.links&populate[]=profile.avatar&populate[]=profile.resume`;
+  const query = `?populate[]=seo&populate[]=profile.avatar&populate[]=profile.resume&populate[]=body`;
   const res = await fetch(`${process.env.API_URL}/api/homepage${query}`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
@@ -60,10 +67,8 @@ Home.getInitialProps = async () => {
   });
   const data = await res.json();
   const error = data.error || null;
-  const meta = data.data.attributes.meta;
+  const seo = data.data.attributes.seo;
   const body = data.data.attributes.body;
-  const school = data.data.attributes.school;
-  const professional_experience = data.data.attributes.professional_experience;
   const profile = data.data.attributes.profile;
   const env = process.env.API_URL;
 
@@ -71,11 +76,9 @@ Home.getInitialProps = async () => {
     data: data.data,
     error: error,
     body: body,
-    school: school,
-    professional_experience: professional_experience,
     profile: profile,
     env: env,
-    meta: meta,
+    seo: seo,
   };
 };
 

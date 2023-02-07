@@ -56,18 +56,15 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, env }) => {
             {profile.sub_title}
           </p>
           <div className="flex justify-center space-x-3">
-            {profile.links.map((link: any) => (
-              <Link
-                href={link.link}
-                title={link.text}
-                {...(link.isBlank && { target: "_blank" })}
-								key={link.id}
-              >
-                <span className="socialbtn text-[#44566C] dark:text-[#A6A6A6] bg-[#F3F6F6] dark:bg-[#1D1D1D]">
-                  <FaGithub />
-                </span>
-              </Link>
-            ))}
+          <Link
+            href={profile.link_github}
+            title="Github"
+            target="_blank"
+          >
+            <span className="socialbtn text-[#44566C] dark:text-[#A6A6A6] bg-[#F3F6F6] dark:bg-[#1D1D1D]">
+              <FaGithub />
+            </span>
+          </Link>
           </div>
           <div className="p-7 rounded-2xl mt-7 bg-[#F3F6F6] dark:bg-[#1D1D1D]">
             <div className="flex py-2.5 border-b border-[#E3E3E3] dark:border-[#3D3A3A]">

@@ -15,3 +15,7 @@ html {
 .dark .dark\:bg-homeTwoBg-dark {
     background-image: url('https://bostami-next.vercel.app/images/background/bgtwo.jpg');
 }
+
+.after-effect {
+    @apply relative inline-block font-bold text-header after:absolute after:top-2/4 after:h-0.5 after:rounded-md after:bg-gradient-to-r from-orange-400 to-red-500 after:transform after:-translate-y-2/4 after:md:w-52;
+}
