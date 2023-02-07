@@ -3,6 +3,8 @@ import { Inter } from "@next/font/google";
 import ProfileCard from "@/components/ProfileCard";
 import Navbar from "@/components/Navbar";
 import { GetStaticProps } from "next";
+import Education from "@/components/Education";
+import Experience from "@/components/Experience";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,13 +36,16 @@ const Resume = ({ data, error, seo }: Props) => {
                         <Navbar />
                         <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
                             <div data-aos="fade" className="aos-init aos-animate">
-                                <div className="flex flex-col items-center justify-center">
-                                    <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-100">
-                                        Resume
-                                    </h1>
-                                    <p className="text-gray-600 dark:text-gray-400">
-                                        Coming soon...
-                                    </p>
+                                <div className="container px-4 sm:px-5 md:px-10 lg:px-14">
+                                    <div className="py-12">
+                                        <h2 className="after-effect after:left-56">
+                                            {data.data.attributes.title}
+                                        </h2>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-6 gap-y-6 mt-[30px]">
+                                            <Education education={data.data.attributes.education} title={data.data.attributes.education_title} />
+                                            <Experience experience={data.data.attributes.experience} title={data.data.attributes.experience_title} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -59,12 +64,16 @@ export const getStaticProps: GetStaticProps = async () => {
     });
     const data = await res.json();
     const error = data.error || null;
+    const education = data.data.attributes.education;
+    const experience = data.data.attributes.experience;
     const seo = data.data.attributes.seo;
 
     return {
         props: {
             data,
             error,
+            education,
+            experience,
             seo,
         },
     };
