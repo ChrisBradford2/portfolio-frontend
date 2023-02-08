@@ -83,6 +83,37 @@ const Projects = ({ data, error }: Props) => {
 
   return (
     <>
+      <Head>
+        <title>Projects</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <meta name="author" content="Nicolas Barbarisi" />
+        <meta name="description" content="Nicolas Barbarisi's portfolio" />
+        <meta name="keywords" content="Nicolas Barbarisi, Portfolio" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@nicolasbarbarisi" />
+        <meta name="twitter:creator" content="@nicolasbarbarisi" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Nicolas Barbarisi's Portfolio" />
+        <meta
+          property="og:description"
+          content="Nicolas Barbarisi's portfolio"
+        />
+        <meta property="og:site_name" content="Nicolas Barbarisi's Portfolio" />
+        <meta property="og:url" content="https://nicolasbarbarisi.com" />
+        <meta property="og:image" content="/images/og-image.png" />
+        <meta property="og:image:secure_url" content="/images/og-image.png" />
+        <meta property="og:image:alt" content="Nicolas Barbarisi's Portfolio" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+      </Head>
       <main className="bg-homeBg min-h-screen bg-no-repeat bg-center bg-cover bg-fixed dark:bg-homeTwoBg-dark md:pb-16 w-full">
         <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:pt-[220px]">
           <ProfileCard />
