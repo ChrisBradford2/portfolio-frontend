@@ -1,4 +1,4 @@
-import { MdSchool, MdWork, MdWorkOutline } from "react-icons/md";
+import { MdWork, } from "react-icons/md";
 
 interface Props {
   experience: any;
@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Experience = ({ experience, title }: Props) => {
-  console.log(experience);
   return (
     <div>
       <div className="flex items-center space-x-2 mb-4">

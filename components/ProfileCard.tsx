@@ -12,11 +12,7 @@ import {
 } from "react-icons/md";
 import { FaLinkedin, FaGithub, FaGitlab, FaDrupal } from "react-icons/fa";
 
-interface ProfileCardProps {
-  profile: any;
-}
-
-const ProfileCard: React.FC<ProfileCardProps> = () => {
+const ProfileCard = () => {
   // Fetch the data from Strapi and display it in the ProfileCard component``
 
   const [profile, setProfile] = React.useState<any>(null);
@@ -37,8 +33,6 @@ const ProfileCard: React.FC<ProfileCardProps> = () => {
     };
     fetchProfile();
   }, []);
-
-  console.log(profile);
 
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("fr-FR");

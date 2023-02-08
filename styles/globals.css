@@ -19,3 +19,25 @@ html {
 .after-effect {
     @apply relative inline-block font-bold text-header after:absolute after:top-2/4 after:h-0.5 after:rounded-md after:bg-gradient-to-r from-orange-400 to-red-500 after:transform after:-translate-y-2/4 after:md:w-52;
 }
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -30px;
+  width: auto;
+  min-height: 50vh;
+}
+.my-masonry-grid_column {
+  padding-left: 30px;
+  background-clip: padding-box;
+}
+.my-masonry-grid_column > div {
+  background: grey;
+  margin-bottom: 30px;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

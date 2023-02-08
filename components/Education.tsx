@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Education = ({ education, title }: Props) => {
-  console.log(education);
 
   const getYear = (date: any) => {
     const newDate = new Date(date);
@@ -24,7 +23,7 @@ const Education = ({ education, title }: Props) => {
         <h2 className="text-3xl font-semibold">{title}</h2>
       </div>
       {education.map((school: any) => (
-        <div className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2">
+        <div className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg dark:border-[#212425] dark:border-2" key={school.id}>
           <div key={school.id}>
             <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
               {getYear(school.start_date)} - {school.end_date ? getYear(school.end_date) : "Present"}
