@@ -9,6 +9,7 @@ import {
   MdEmail,
   MdCalendarToday,
   MdDownload,
+  MdCheckCircle,
 } from "react-icons/md";
 import { FaLinkedin, FaGithub, FaGitlab, FaDrupal } from "react-icons/fa";
 

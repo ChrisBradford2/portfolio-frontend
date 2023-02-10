@@ -6,8 +6,8 @@ export default async function(req: any, res: any) {
   const { firstName, lastName, email, subject, message } = req.body
 
   const content = {
-    to: 'contact@nicolas-barbarisi.com',
-    from: 'contact@nicolas-barbarisi.com',
+    to: `${process.env.SENDGRID_API_EMAIL}`,
+    from: `${process.env.SENDGRID_API_EMAIL}`,
     subject: `${firstName} ${lastName} - ${subject}`,
     text: message,
     html: `<h1>You have a new message from your portfolio</h1>

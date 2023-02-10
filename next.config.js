@@ -8,6 +8,7 @@ const nextConfig = {
     API_URL: process.env.API_URL,
     API_TOKEN: process.env.API_TOKEN,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+    SENDGRID_API_EMAIL: process.env.SENDGRID_API_EMAIL
   },
 }
 

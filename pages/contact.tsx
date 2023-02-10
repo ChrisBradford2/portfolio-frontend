@@ -1,7 +1,8 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import Container from "@/components/Container";
-import sendEmail from './api/contact';
+import sendEmail from "./api/contact";
+import { MdCheckCircle, MdError } from "react-icons/md";
 
 interface Inputs {
   firstName: string;
@@ -22,68 +23,70 @@ interface Status {
 
 export default function Contact() {
   const [inputs, setInputs] = useState<Inputs>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    subject: '',
-    message: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
   const [resStatus, setStatus] = useState<Status>({
     submitted: false,
     submitting: false,
-    info: { error: false, msg: null }
+    info: { error: false, msg: null },
   });
-  
+
   const handleResponse = (resStatus: number, msg: string) => {
     if (resStatus === 200) {
       setStatus({
         submitted: true,
         submitting: false,
-        info: { error: false, msg: msg }
-      })
+        info: { error: false, msg: msg },
+      });
       setInputs({
-        firstName: '',
-        lastName: '',
-        email: '',
-        subject: '',
-        message: ''
-      })
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
     } else {
-      setStatus(prevStatus => ({
+      setStatus((prevStatus) => ({
         ...prevStatus,
-        info: { error: true, msg: msg }
-      }))
+        info: { error: true, msg: msg },
+      }));
     }
-  }
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.persist()
-    setInputs(prev => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    e.persist();
+    setInputs((prev) => ({
       ...prev,
-      [e.target.id]: e.target.value
-    }))
+      [e.target.id]: e.target.value,
+    }));
     setStatus({
       submitted: false,
       submitting: false,
-      info: { error: false, msg: null }
-    })
-  }
+      info: { error: false, msg: null },
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log(inputs)
-    setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
-    const res = await fetch('/api/contact', {
-      method: 'POST',
+    e.preventDefault();
+    console.log(inputs);
+    setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
+    const res = await fetch("/api/contact", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(inputs)
-    })
-    const text = await res.text()
-    handleResponse(res.status, text)
-  }
+      body: JSON.stringify(inputs),
+    });
+    const text = await res.text();
+    handleResponse(res.status, text);
+  };
   return (
     <>
       <Head>
@@ -107,11 +110,14 @@ export default function Contact() {
               Contact
             </h2>
             <div className="border-[#212425] dark:border-2 mb-8 md:p-[48px] p-4 bg-color-810 rounded-xl dark:bg-[#111111]">
-              <h3 className="text-2xl font-bold mb-4">Get in touch</h3>
+              <h3 className="text-2xl font-bold mb-4">Je peux vous aider ?</h3>
               <p className="mb-4">
-                I&apos;m currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
+                N'hésitez pas à me contacter via le formulaire ci-dessous.
               </p>
-              <form className="w-full max-w-lg mx-auto mt-12" onSubmit={handleSubmit}>
+              <form
+                className="w-full max-w-lg mx-auto mt-12"
+                onSubmit={handleSubmit}
+              >
                 {/* Form underlines */}
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -191,19 +197,34 @@ export default function Contact() {
                     className="inline-flex items-center mx-auto bg-gradient-to-r from-[#FA5252] to-[#DD2476] duration-200 transition ease-linear hover:bg-gradient-to-l from-[#DD2476] to-[#fa5252ef] px-8 py-3 text-lg text-white rounded-[35px] mt-6"
                     type="submit"
                   >
-                    Submit
+                    Envoyer
                   </button>
                 </div>
               </form>
-              {/* Send the form */}
-              {resStatus.info.error && (
-                <div className="text-red-500 text-center mt-4">
-                  {resStatus.info.msg}
+              {!resStatus.info.error && (
+                <div className="flex items-center bg-[#E3FCEF] border-l-4 border-[#34D399] p-4 dark:bg-[#1D1D1D] dark:border-[#34D399] mt-12">
+                  <div className="text-[#34D399] rounded-full bg-[#E3FCEF] mr-3 dark:bg-[#1D1D1D]">
+                    <MdCheckCircle />
+                  </div>
+                  <div className="text-sm text-[#34D399] dark:text-[#34D399]">
+                    <p>
+                      <strong className="font-bold">Impeccable !</strong> Votre
+                      message a été envoyé avec succès 👍
+                    </p>
+                  </div>
                 </div>
               )}
-              {!resStatus.info.error && (
-                <div className="text-green-500 text-center mt-4">
-                  {resStatus.info.msg}
+              {resStatus.info.error && (
+                <div className="flex items-center bg-[#FEE2E2] border-l-4 border-[#F87171] p-4 dark:bg-[#1D1D1D] dark:border-[#F87171] mt-4">
+                  <div className="text-[#F87171] rounded-full bg-[#FEE2E2] mr-3 dark:bg-[#1D1D1D]">
+                    <MdError />
+                  </div>
+                  <div className="text-sm text-[#F87171] dark:text-[#F87171]">
+                    <p>
+                      <strong className="font-bold">Oups !</strong> Une erreur
+                      est survenue lors de l&apos;envoi de votre message 😢
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
@@ -212,4 +233,4 @@ export default function Contact() {
       </Container>
     </>
   );
-};
+}
