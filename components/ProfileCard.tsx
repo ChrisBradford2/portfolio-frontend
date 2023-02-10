@@ -71,7 +71,7 @@ const ProfileCard = () => {
       <div className="w-full mb-6 lg:mb-0 mx-auto relative bg-white text-center dark:bg-[#111111] px-6 rounded-[20px] mt-[180px] md:mt-[220px] lg:mt-0 ">
           <>
             <Image
-              loader={({ src }) => src}
+              priority
               src={`${process.env.API_URL}${profile.avatar.data.attributes.url}`}
               width={profile.avatar.data.attributes.formats.thumbnail.width}
               height={profile.avatar.data.attributes.formats.thumbnail.height}

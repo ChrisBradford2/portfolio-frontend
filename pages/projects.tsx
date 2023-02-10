@@ -85,7 +85,7 @@ const Projects = ({ data, error }: Props) => {
   return (
     <>
       <Head>
-        <title>Projects</title>
+        <title>Projets</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -118,7 +118,7 @@ const Projects = ({ data, error }: Props) => {
       <Container>
         <div className="container mb-8 px-4 sm:px-5 md:px-10 lg:px-[60px]">
           <div className="py-12">
-            <h2 className="after-effect after:left-56">Titre</h2>
+            <h2 className="after-effect after:left-40">Projets</h2>
             <ul className="mt-[40px] flex w-full justify-start md:justify-end flex-wrap font-medium pb-12">
               <li
                 className={`${selectedCategory === "All" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
@@ -153,17 +153,14 @@ const Projects = ({ data, error }: Props) => {
                     <Image
                         className="object-cover object-center w-full cursor-pointer transition duration-200 ease-in-out transform hover:scale-110 rounded-lg h-auto"
                         src={`${process.env.API_URL}${project.attributes.media.data.attributes.url}`}
-                        alt="content"
+                        alt={project.attributes.media.data.attributes.alternativeText}
                         onClick={() => openModal(project)}
                         width={500}
                         height={500}
                       />
                     </div>
                     <div className="pt-5 text-[14px] font-normal text-gray-lite block dark:text-[#A6A6A6]">
-                      {project.attributes.project_type}{" "}
-                      {project.attributes.project_type === "Company"
-                        ? `(Client: ${project.attributes.client})`
-                        : null}
+                      {project.attributes.project_type}
                     </div>
                     <h3
                       className="font-medium cursor-pointer text-xl duration-300 transition hover:text-[#FA5252] dark:hover:text-[#FA5252] dark:text-white mt-2"
