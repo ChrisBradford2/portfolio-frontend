@@ -19,7 +19,7 @@ const Body = ({ body, skills, skills_title }: Props) => {
         </div>
       </div>
       <section className="pb-12 px-2 sm:px-5 md:px-10 lg:px-14 ">
-        <h3 className="text-[35px] dark:text-white font-medium pb-5">
+        <h3 className="text-[35px] text-white font-medium pb-5">
           {skills_title}
         </h3>
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2 ">

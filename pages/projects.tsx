@@ -13,8 +13,6 @@ import {
   FaCode,
   FaGithub,
   FaGitlab,
-  FaMicrosoft,
-  FaSquare,
 } from "react-icons/fa";
 import { VscAzure } from "react-icons/vsc";
 import { MdOpenInNew } from "react-icons/md";
@@ -67,7 +65,6 @@ const Projects = ({ data, error }: Props) => {
       selectedCategory === "All"
   );
 
-  let subtitle: any;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [selectedProject, setSelectedProject] = React.useState<Project | null>(
     null
@@ -148,7 +145,7 @@ const Projects = ({ data, error }: Props) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredData.map((project: any) => (
                 <div key={project.id}>
-                  <div className="rounded-lg p-6 dark:border-[2px] border-[#212425]">
+                  <div className="rounded-lg p-6 border-[2px] border-[#212425]">
                     <div className="overflow-hidden rounded-lg">
                     <Image
                         className="object-cover object-center w-full cursor-pointer transition duration-200 ease-in-out transform hover:scale-110 rounded-lg h-auto"
@@ -159,11 +156,11 @@ const Projects = ({ data, error }: Props) => {
                         height={500}
                       />
                     </div>
-                    <div className="pt-5 text-[14px] font-normal text-gray-lite block dark:text-[#A6A6A6]">
+                    <div className="pt-5 text-[14px] font-normal text-gray-lite block text-[#A6A6A6]">
                       {project.attributes.project_type}
                     </div>
                     <h3
-                      className="font-medium cursor-pointer text-xl duration-300 transition hover:text-[#FA5252] dark:hover:text-[#FA5252] dark:text-white mt-2"
+                      className="font-medium cursor-pointer text-xl duration-300 transition hover:text-[#FA5252] hover:text-[#FA5252] text-white mt-2"
                       onClick={() => openModal(project)}
                     >
                       {project.attributes.title}
@@ -199,27 +196,27 @@ const Projects = ({ data, error }: Props) => {
         contentLabel="Project Modal"
       >
         {selectedProject && (
-          <div className="w-full md:w-10/12 items-center lg:w-[850px] bg-white dark:bg-[#323232] mx-auto rounded-xl p-4 md:p-8 absolute left-1/2 top-1/2 transform -translate-x-[50%] -translate-y-[50%] shadow-lg z-50 overflow-auto max-h-[90vh] no-scrollbar">
+          <div className="w-full md:w-10/12 items-center lg:w-[850px] bg-white bg-[#323232] mx-auto rounded-xl p-4 md:p-8 absolute left-1/2 top-1/2 transform -translate-x-[50%] -translate-y-[50%] shadow-lg z-50 overflow-auto max-h-[90vh] no-scrollbar">
             <div className=" overflow-hidden rounded-lg">
-              <h2 className="text-[#ef4060] dark:hover:text-[#FA5252] text-4xl text-center font-bold">
+              <h2 className="text-[#ef4060] hover:text-[#FA5252] text-4xl text-center font-bold">
                 {selectedProject.attributes.title}
               </h2>
               {/* Subtitle with the year with Tailwind CSS badge */}
               <div className="flex justify-center items-center">
-                <span className="bg-[#ef4060] dark:hover:bg-[#FA5252] text-white text-xs font-bold rounded-full px-2 py-1">
+                <span className="bg-[#ef4060] hover:bg-[#FA5252] text-white text-xs font-bold rounded-full px-2 py-1">
                   {selectedProject.attributes.release_year}
                 </span>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 my-6">
                 <div className="space-y-2">
-                  <p className="dark:text-white flex items-center mt-2 lg:mt-0 text-[15px] sm:text-lg ">
+                  <p className="text-white flex items-center mt-2 lg:mt-0 text-[15px] sm:text-lg ">
                     <FaChartPie className="mr-2" />
                     Project Type:{" "}
-                    <span className="text-[#ef4060] dark:hover:text-[#FA5252] font-medium ml-2">
+                    <span className="text-[#ef4060] hover:text-[#FA5252] font-medium ml-2">
                       {selectedProject.attributes.project_type}
                     </span>
                   </p>
-                  <p className="dark:text-white flex items-center text-[15px] sm:text-lg ">
+                  <p className="text-white flex items-center text-[15px] sm:text-lg ">
                     <FaCode className="mr-2" />
                     Language :{" "}
                     {selectedProject.attributes.languages.data.map(
@@ -244,7 +241,7 @@ const Projects = ({ data, error }: Props) => {
                 <div className="space-y-2">
                   {selectedProject.attributes.repo_type && (
                     <>
-                      <p className="dark:text-white flex items-center text-[15px] sm:text-lg ">
+                      <p className="text-white flex items-center text-[15px] sm:text-lg ">
                         {selectedProject.attributes.repo_type === "Github" ? (
                           <FaGithub className="mr-2" />
                         ) : selectedProject.attributes.repo_type ===
@@ -260,7 +257,7 @@ const Projects = ({ data, error }: Props) => {
                           target="_blank"
                           rel="noopener noreferrer"
                           title={`Lien vers le répo ${selectedProject.attributes.repo_type}`}
-                          className="text-[#ef4060] dark:hover:text-[#FA5252] font-medium ml-2"
+                          className="text-[#ef4060] hover:text-[#FA5252] font-medium ml-2"
                         >
                           {`Lien vers le répo ${selectedProject.attributes.repo_type}`}
                         </Link>
@@ -268,7 +265,7 @@ const Projects = ({ data, error }: Props) => {
                     </>
                   )}
                   {selectedProject.attributes.preview_link && (
-                    <p className="dark:text-white flex items-center text-[15px] sm:text-lg ">
+                    <p className="text-white flex items-center text-[15px] sm:text-lg ">
                       <MdOpenInNew className="mr-2" />
                       Preview{" : "}
                       <Link
@@ -276,7 +273,7 @@ const Projects = ({ data, error }: Props) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         title={`Lien vers la preview`}
-                        className="text-[#ef4060] dark:hover:text-[#FA5252] font-medium ml-2"
+                        className="text-[#ef4060] hover:text-[#FA5252] font-medium ml-2"
                       >
                         {selectedProject.attributes.preview_link}
                       </Link>
@@ -284,7 +281,7 @@ const Projects = ({ data, error }: Props) => {
                   )}
                 </div>
               </div>
-              <div className="dark:text-white text-2line font-normal text-[15px] sm:text-sm ">
+              <div className="text-white text-2line font-normal text-[15px] sm:text-sm ">
                 {HTMLReactParser(selectedProject.attributes.body)}
               </div>
               <Image

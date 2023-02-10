@@ -1,8 +1,9 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import Container from "@/components/Container";
-import sendEmail from "./api/contact";
+import * as yup from 'yup';
 import { MdCheckCircle, MdError } from "react-icons/md";
+import { cp } from "fs";
 
 interface Inputs {
   firstName: string;
@@ -38,6 +39,8 @@ export default function Contact() {
 
   const [sent, setSent] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+
+  const allFieldsFilled = Object.values(inputs).every(input => input !== '')
 
   const handleResponse = (resStatus: number, msg: string) => {
     if (resStatus === 200) {
@@ -80,6 +83,29 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    try {
+      await yup.object().shape({
+        firstName: yup.string().required(),
+        lastName: yup.string().required(),
+        email: yup.string().email().required(),
+        subject: yup.string().required(),
+        message: yup.string().required(),
+      }).validate(inputs);
+    } catch (err: any) {
+      setStatus({
+        submitted: false,
+        submitting: false,
+        info: { error: true, msg: err.errors[0] },
+      });
+      return;
+    }
+    console.log(resStatus.info.msg);
+    if (setSent) {
+      setSent(false);
+    }
+    if (error) {
+      setError(false);
+    }
     setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
     const res = await fetch("/api/contact", {
       method: "POST",
@@ -91,6 +117,7 @@ export default function Contact() {
     const text = await res.text();
     handleResponse(res.status, text);
   };
+
   return (
     <>
       <Head>
@@ -113,7 +140,7 @@ export default function Contact() {
             <h2 className="after-effect after:left-48 mt-12 lg:mt-0 mb-12 md:mb-[30px]">
               Contact
             </h2>
-            <div className="border-[#212425] dark:border-2 mb-8 md:p-[48px] p-4 bg-color-810 rounded-xl dark:bg-[#111111]">
+            <div className="border-[#212425] border-2 mb-8 md:p-[48px] p-4 bg-color-810 rounded-xl">
               <h3 className="text-2xl font-bold mb-4">Je peux vous aider ?</h3>
               <p className="mb-4">
                 N'hésitez pas à me contacter via le formulaire ci-dessous.
@@ -126,9 +153,9 @@ export default function Contact() {
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block" htmlFor="firstName">
-                      <span className="text-gray-500">Prénom</span>
+                      <span className="text-[#A6A6A6]">Prénom</span>
                       <input
-                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-800 focus:ring-0 focus:border-red-500 bg-transparent"
+                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-[#1D1D1D] focus:ring-0 focus:border-red-500 bg-transparent"
                         id="firstName"
                         type="text"
                         placeholder="Jane"
@@ -136,12 +163,17 @@ export default function Contact() {
                         onChange={handleChange}
                       />
                     </label>
+                    {inputs.firstName === "" && resStatus.info.error && (
+                      <p className="text-red-500 text-xs italic">
+                        Veuillez renseigner votre prénom
+                      </p>
+                    )}
                   </div>
                   <div className="w-full md:w-1/2 px-3">
                     <label className="block" htmlFor="lastName">
-                      <span className="text-gray-500">Nom</span>
+                      <span className="text-[#A6A6A6]">Nom</span>
                       <input
-                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-800 focus:ring-0 focus:border-red-500 bg-transparent"
+                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-[#1D1D1D] focus:ring-0 focus:border-red-500 bg-transparent"
                         id="lastName"
                         type="text"
                         placeholder="Doe"
@@ -149,14 +181,19 @@ export default function Contact() {
                         onChange={handleChange}
                       />
                     </label>
+                    {inputs.lastName === "" && resStatus.info.error && (
+                      <p className="text-red-500 text-xs italic">
+                        Veuillez renseigner votre nom
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block" htmlFor="email">
-                      <span className="text-gray-500">Email</span>
+                      <span className="text-[#A6A6A6]">Email</span>
                       <input
-                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-800 focus:ring-0 focus:border-red-500 bg-transparent"
+                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-[#1D1D1D] focus:ring-0 focus:border-red-500 bg-transparent"
                         id="email"
                         type="email"
                         placeholder="jane.doe@example.com"
@@ -164,14 +201,19 @@ export default function Contact() {
                         onChange={handleChange}
                       />
                     </label>
+                    {inputs.email === "" && resStatus.info.error && (
+                      <p className="text-red-500 text-xs italic">
+                        Veuillez renseigner votre email
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block" htmlFor="subject">
-                      <span className="text-gray-500">Objet</span>
+                      <span className="text-[#A6A6A6]">Objet</span>
                       <input
-                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-800 focus:ring-0 focus:border-red-500 bg-transparent"
+                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-[#1D1D1D] focus:ring-0 focus:border-red-500 bg-transparent"
                         id="subject"
                         type="text"
                         placeholder="Objet de votre message"
@@ -179,14 +221,19 @@ export default function Contact() {
                         onChange={handleChange}
                       />
                     </label>
+                    {inputs.subject === "" && resStatus.info.error && (
+                      <p className="text-red-500 text-xs italic">
+                        Veuillez renseigner l'objet de votre message
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block" htmlFor="message">
-                      <span className="text-gray-500">Message</span>
+                      <span className="text-[#A6A6A6]">Message</span>
                       <textarea
-                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-800 focus:ring-0 focus:border-red-500 bg-transparent"
+                        className="mt-0 block w-full px-0.5 border-0 border-b-2 border-[#1D1D1D] focus:ring-0 focus:border-red-500 bg-transparent"
                         id="message"
                         placeholder="Votre message"
                         value={inputs.message}
@@ -194,23 +241,31 @@ export default function Contact() {
                         name="message"
                       />
                     </label>
+                    {inputs.message === "" && resStatus.info.error && (
+                      <p className="text-red-500 text-xs italic">
+                        Veuillez renseigner votre message
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="flex justify-center">
                   <button
-                    className="inline-flex items-center mx-auto bg-gradient-to-r from-[#FA5252] to-[#DD2476] duration-200 transition ease-linear hover:bg-gradient-to-l from-[#DD2476] to-[#fa5252ef] px-8 py-3 text-lg text-white rounded-[35px] mt-6"
+                    className={`inline-flex items-center mx-auto px-8 py-3 text-lg rounded-[35px] mt-6 ${
+                        !allFieldsFilled && "bg-[#1D1D1D] text-[#A6A6A6] cursor-not-allowed"
+                      } ${allFieldsFilled && "bg-gradient-to-r from-[#FA5252] to-[#DD2476] ease-linear hover:animate-pulse text-white"}`}
                     type="submit"
+                    disabled={!allFieldsFilled}
                   >
                     Envoyer
                   </button>
                 </div>
               </form>
               {sent && (
-                <div className="flex items-center bg-[#E3FCEF] border-l-4 border-[#34D399] p-4 dark:bg-[#1D1D1D] dark:border-[#34D399] mt-12">
-                  <div className="text-[#34D399] rounded-full bg-[#E3FCEF] mr-3 dark:bg-[#1D1D1D]">
+                <div className="flex items-center border-l-4 p-4 bg-[#1D1D1D] border-[#34D399] mt-12">
+                  <div className="text-[#34D399] rounded-full mr-3 bg-[#1D1D1D]">
                     <MdCheckCircle />
                   </div>
-                  <div className="text-sm text-[#34D399] dark:text-[#34D399]">
+                  <div className="text-sm text-[#34D399]">
                     <p>
                       <strong className="font-bold">Impeccable !</strong> Votre
                       message a été envoyé avec succès 👍
@@ -219,11 +274,11 @@ export default function Contact() {
                 </div>
               )}
               {error && (
-                <div className="flex items-center bg-[#FEE2E2] border-l-4 border-[#F87171] p-4 dark:bg-[#1D1D1D] dark:border-[#F87171] mt-12">
-                  <div className="text-[#F87171] rounded-full bg-[#FEE2E2] mr-3 dark:bg-[#1D1D1D]">
+                <div className="flex items-center border-l-4 p-4 bg-[#1D1D1D] border-[#F87171] mt-12">
+                  <div className="text-[#F87171] rounded-full mr-3 bg-[#1D1D1D]">
                     <MdError />
                   </div>
-                  <div className="text-sm text-[#F87171] dark:text-[#F87171]">
+                  <div className="text-sm text-[#F87171]">
                     <p>
                       <strong className="font-bold">Oups !</strong> Une erreur
                       est survenue lors de l&apos;envoi de votre message 😢
