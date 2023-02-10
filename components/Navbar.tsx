@@ -3,11 +3,11 @@ import React from "react";
 import { MdCode, MdHome, MdOutlineArticle, MdOutlineContacts } from "react-icons/md";
 import { useRouter } from "next/router";
 
-export default function Navbar() {
+const Navbar = () => {
   const router = useRouter();
   return (
-    <header className="lg:w-[526px] h-[144px] hidden lg:block p-[30px] ml-auto mb-10 rounded-[16px] bg-white dark:bg-[#111111]">
-      <nav className="hidden lg:block">
+    <header className="lg:w-[526px] h-[144px] block p-[30px] ml-auto mb-10 rounded-[16px] bg-white dark:bg-[#111111]">
+      <nav className="block">
         <ul className="flex justify-around">
           <li>
             <Link
@@ -62,3 +62,5 @@ export default function Navbar() {
     </header>
   );
 }
+
+export default Navbar;

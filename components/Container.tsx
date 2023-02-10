@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 import Navbar from './Navbar';
 import ProfileCard from './ProfileCard';
 
@@ -16,6 +17,7 @@ const Container: React.FC<Props> = ({ children }) => (
           <div data-aos="fade" className="aos-init aos-animate">
             { children }
           </div>
+          <Footer />
         </div>
       </div>
     </div>
