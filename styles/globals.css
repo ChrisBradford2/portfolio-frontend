@@ -16,24 +16,18 @@ html {
     background-image: url('https://bostami-next.vercel.app/images/background/bgtwo.jpg');
 }
 
+a.current-path {
+  @apply bg-[#212425] hover:bg-gradient-to-r text-white bg-gradient-to-r from-[#FA5252] to-[#DD2476];
+}
+
+.inactive-path {
+    @apply w-full h-20 rounded-[10px] cursor-pointer font-medium px-2.5 text-[#A6A6A6] justify-center flex flex-col items-center transition-all duration-300 ease-in-out hover:text-white bg-[#212425]  hover:bg-gradient-to-r from-[#FA5252] to-[#DD2476];
+}
+
 .after-effect {
     @apply relative inline-block font-bold text-header after:absolute after:top-2/4 after:h-0.5 after:rounded-md after:bg-gradient-to-r from-orange-400 to-red-500 after:transform after:-translate-y-2/4 after:md:w-52;
 }
 
-.my-masonry-grid {
-  display: flex;
-  margin-left: -30px;
-  width: auto;
-  min-height: 50vh;
-}
-.my-masonry-grid_column {
-  padding-left: 30px;
-  background-clip: padding-box;
-}
-.my-masonry-grid_column > div {
-  background: grey;
-  margin-bottom: 30px;
-}
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

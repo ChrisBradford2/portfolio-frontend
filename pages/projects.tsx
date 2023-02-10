@@ -18,6 +18,7 @@ import {
 } from "react-icons/fa";
 import { VscAzure } from "react-icons/vsc";
 import { MdOpenInNew } from "react-icons/md";
+import Container from "@/components/Container";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -114,77 +115,69 @@ const Projects = ({ data, error }: Props) => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      <main className="bg-homeBg min-h-screen bg-no-repeat bg-center bg-cover bg-fixed dark:bg-homeTwoBg-dark md:pb-16 w-full">
-        <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:pt-[220px]">
-          <ProfileCard />
-          <div className="col-span-12 lg:col-span-8">
-            <Navbar />
-            <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
-              <div data-aos="fade" className="aos-init aos-animate">
-                <div className="container mb-8 px-4 sm:px-5 md:px-10 lg:px-[60px]">
-                  <div className="py-12">
-                    <h2 className="after-effect after:left-56">Titre</h2>
-                    <ul className="mt-[40px] flex w-full justify-start md:justify-end flex-wrap font-medium pb-12">
-                      <li
-                        className="text-[#FA5252] mr-4 md:mx-4 cursor-pointer"
-                        onClick={() => handleCategory("All")}
-                      >
-                        All
-                      </li>
-                      <li
-                        className="text-[#FA5252] mr-4 md:mx-4 cursor-pointer"
-                        onClick={() => handleCategory("Company")}
-                      >
-                        Company
-                      </li>
-                      <li
-                        className="text-[#FA5252] mr-4 md:mx-4 cursor-pointer"
-                        onClick={() => handleCategory("Personal")}
-                      >
-                        Personal
-                      </li>
-                      <li
-                        className="text-[#FA5252] mr-4 md:mx-4 cursor-pointer"
-                        onClick={() => handleCategory("School")}
-                      >
-                        School
-                      </li>
-                    </ul>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {filteredData.map((project: any) => (
-                        <div key={project.id}>
-                          <div className="rounded-lg p-6 dark:border-[2px] border-[#212425]">
-                            <div className="overflow-hidden rounded-lg">
-                              <img
-                                className="object-cover object-center w-full cursor-pointer transition duration-200 ease-in-out transform hover:scale-110 rounded-lg h-auto"
-                                src={`${process.env.API_URL}${project.attributes.media.data.attributes.url}`}
-                                alt="content"
-                                onClick={() => openModal(project)}
-                              />
-                            </div>
-                            <div className="pt-5 text-[14px] font-normal text-gray-lite block dark:text-[#A6A6A6]">
-                              {project.attributes.project_type}{" "}
-                              {project.attributes.project_type === "Company"
-                                ? `(Client: ${project.attributes.client})`
-                                : null}
-                            </div>
-                            <h3
-                              className="font-medium cursor-pointer text-xl duration-300 transition hover:text-[#FA5252] dark:hover:text-[#FA5252] dark:text-white mt-2"
-                              onClick={() => openModal(project)}
-                            >
-                              {project.attributes.title}
-                            </h3>
-                          </div>
-                        </div>
-                      ))}
+      <Container>
+        <div className="container mb-8 px-4 sm:px-5 md:px-10 lg:px-[60px]">
+          <div className="py-12">
+            <h2 className="after-effect after:left-56">Titre</h2>
+            <ul className="mt-[40px] flex w-full justify-start md:justify-end flex-wrap font-medium pb-12">
+              <li
+                className={`${selectedCategory === "All" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
+                onClick={() => handleCategory("All")}
+              >
+                All
+              </li>
+              <li
+                className={`${selectedCategory === "Company" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
+                onClick={() => handleCategory("Company")}
+              >
+                Company
+              </li>
+              <li
+                className={`${selectedCategory === "Personal" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
+                onClick={() => handleCategory("Personal")}
+              >
+                Personal
+              </li>
+              <li
+                className={`${selectedCategory === "School" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
+                onClick={() => handleCategory("School")}
+              >
+                School
+              </li>
+            </ul>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {filteredData.map((project: any) => (
+                <div key={project.id}>
+                  <div className="rounded-lg p-6 dark:border-[2px] border-[#212425]">
+                    <div className="overflow-hidden rounded-lg">
+                    <Image
+                        className="object-cover object-center w-full cursor-pointer transition duration-200 ease-in-out transform hover:scale-110 rounded-lg h-auto"
+                        src={`${process.env.API_URL}${project.attributes.media.data.attributes.url}`}
+                        alt="content"
+                        onClick={() => openModal(project)}
+                        width={500}
+                        height={500}
+                      />
                     </div>
+                    <div className="pt-5 text-[14px] font-normal text-gray-lite block dark:text-[#A6A6A6]">
+                      {project.attributes.project_type}{" "}
+                      {project.attributes.project_type === "Company"
+                        ? `(Client: ${project.attributes.client})`
+                        : null}
+                    </div>
+                    <h3
+                      className="font-medium cursor-pointer text-xl duration-300 transition hover:text-[#FA5252] dark:hover:text-[#FA5252] dark:text-white mt-2"
+                      onClick={() => openModal(project)}
+                    >
+                      {project.attributes.title}
+                    </h3>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
-      </main>
+      </Container>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

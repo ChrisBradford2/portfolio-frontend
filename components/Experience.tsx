@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Experience = ({ experience, title }: Props) => {
-  {/* Check if localizations.data exists */}
   return (
     <div>
       <div className="flex items-center space-x-2 mb-4">

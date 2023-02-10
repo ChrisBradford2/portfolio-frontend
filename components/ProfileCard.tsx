@@ -18,7 +18,6 @@ const ProfileCard = () => {
   const [profile, setProfile] = React.useState<any>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [birthday, setBirthday] = React.useState<any>(null);
-  const [data, setData] = React.useState<any>(null);
 
   useEffect(() => {
     const storedData = localStorage.getItem('profileData');
@@ -64,7 +63,7 @@ const ProfileCard = () => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (

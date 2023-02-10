@@ -3,6 +3,7 @@ import { Inter } from "@next/font/google";
 import ProfileCard from "@/components/ProfileCard";
 import Navbar from "@/components/Navbar";
 import Body from "@/components/Body";
+import Container from "@/components/Container";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,19 +39,9 @@ const Home = ({
         <meta name="robots" content={seo.metaRobots} />
       </Head>
 
-      <main className="bg-homeBg min-h-screen bg-no-repeat bg-center bg-cover bg-fixed dark:bg-homeTwoBg-dark md:pb-16 w-full">
-        <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:pt-[220px]">
-          <ProfileCard />
-          <div className="col-span-12 lg:col-span-8">
-            <Navbar />
-            <div className="lg:rounded-2xl bg-white dark:bg-[#111111]">
-              <div data-aos="fade" className="aos-init aos-animate">
-                <Body body={body} skills={skills} skills_title={data.data.attributes.skills_title} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+      <Container>
+        <Body body={body} skills={skills} skills_title={data.data.attributes.skills_title} />
+      </Container>
     </>
   );
 };
