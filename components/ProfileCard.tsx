@@ -11,7 +11,7 @@ import {
   MdDownload,
   MdCheckCircle,
 } from "react-icons/md";
-import { FaLinkedin, FaGithub, FaGitlab, FaDrupal } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaGitlab, FaDrupal, FaWordpress } from "react-icons/fa";
 
 const ProfileCard = () => {
   // Fetch the data from Strapi and display it in the ProfileCard component``
@@ -113,6 +113,12 @@ const ProfileCard = () => {
                 <Link href={profile.link_drupal} title="Drupal" target="_blank">
                   <span className="socialbtn text-[#0578BE] bg-[#1D1D1D]">
                     <FaDrupal />
+                  </span>
+                </Link>
+
+                <Link href={profile.link_blog} title="Blog" target="_blank">
+                  <span className="socialbtn text-[#44566C] bg-[#1D1D1D]">
+                    <FaWordpress />
                   </span>
                 </Link>
               </div>
