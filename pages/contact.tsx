@@ -36,8 +36,12 @@ export default function Contact() {
     info: { error: false, msg: null },
   });
 
+  const [sent, setSent] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+
   const handleResponse = (resStatus: number, msg: string) => {
     if (resStatus === 200) {
+      setSent(true);
       setStatus({
         submitted: true,
         submitting: false,
@@ -51,6 +55,7 @@ export default function Contact() {
         message: "",
       });
     } else {
+      setError(true);
       setStatus((prevStatus) => ({
         ...prevStatus,
         info: { error: true, msg: msg },
@@ -75,7 +80,6 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(inputs);
     setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
     const res = await fetch("/api/contact", {
       method: "POST",
@@ -201,7 +205,7 @@ export default function Contact() {
                   </button>
                 </div>
               </form>
-              {!resStatus.info.error && (
+              {sent && (
                 <div className="flex items-center bg-[#E3FCEF] border-l-4 border-[#34D399] p-4 dark:bg-[#1D1D1D] dark:border-[#34D399] mt-12">
                   <div className="text-[#34D399] rounded-full bg-[#E3FCEF] mr-3 dark:bg-[#1D1D1D]">
                     <MdCheckCircle />
@@ -214,8 +218,8 @@ export default function Contact() {
                   </div>
                 </div>
               )}
-              {resStatus.info.error && (
-                <div className="flex items-center bg-[#FEE2E2] border-l-4 border-[#F87171] p-4 dark:bg-[#1D1D1D] dark:border-[#F87171] mt-4">
+              {error && (
+                <div className="flex items-center bg-[#FEE2E2] border-l-4 border-[#F87171] p-4 dark:bg-[#1D1D1D] dark:border-[#F87171] mt-12">
                   <div className="text-[#F87171] rounded-full bg-[#FEE2E2] mr-3 dark:bg-[#1D1D1D]">
                     <MdError />
                   </div>
