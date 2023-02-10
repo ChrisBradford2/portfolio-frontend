@@ -1,7 +1,5 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import Image from "next/image";
-import Link from "next/link";
 import ProfileCard from "@/components/ProfileCard";
 import Navbar from "@/components/Navbar";
 import Body from "@/components/Body";

@@ -1,4 +1,5 @@
 import { MdWork, } from "react-icons/md";
+import getYear from "../lib/getYear";
 
 interface Props {
   experience: any;
@@ -18,7 +19,7 @@ const Experience = ({ experience, title }: Props) => {
         {experience.map((company: any) => (
           <div key={company.id}>
             <span className="text-tiny text-gray-lite dark:text-[#b7b7b7]">
-                {company.start_date} - {company.end_date ? company.end_date : "Present"}
+              {getYear(company.start_date)} - {company.end_date ? getYear(company.end_date) : "Present"}
             </span>
             <h3 className="text-lg font-semibold dark:text-white">
                 {company.job}

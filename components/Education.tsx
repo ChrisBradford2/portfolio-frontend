@@ -1,4 +1,5 @@
 import { MdSchool } from "react-icons/md";
+import getYear from "../lib/getYear";
 
 interface Props {
   education: any;
@@ -6,13 +7,6 @@ interface Props {
 }
 
 const Education = ({ education, title }: Props) => {
-
-  const getYear = (date: any) => {
-    const newDate = new Date(date);
-    return newDate.toLocaleDateString("en-US", {
-      year: "numeric",
-    });
-  };
 
   return (
     <div>

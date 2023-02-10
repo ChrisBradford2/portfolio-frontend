@@ -18,8 +18,15 @@ const ProfileCard = () => {
   const [profile, setProfile] = React.useState<any>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [birthday, setBirthday] = React.useState<any>(null);
+  const [data, setData] = React.useState<any>(null);
 
   useEffect(() => {
+    const storedData = localStorage.getItem('profileData');
+    if (storedData) {
+      setProfile(JSON.parse(storedData));
+      setLoading(false);
+      setBirthday(getAge(JSON.parse(storedData).birthday));
+    }
     const fetchProfile = async () => {
       const res = await fetch(`${process.env.API_URL}/api/profile?populate=*`, {
         headers: {
@@ -30,13 +37,10 @@ const ProfileCard = () => {
       setProfile(data.data.attributes);
       setLoading(false);
       setBirthday(getAge(data.data.attributes.birthday));
+      localStorage.setItem('profileData', JSON.stringify(data.data.attributes));
     };
     fetchProfile();
   }, []);
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString("fr-FR");
-  };
 
   const getAge = (date: string) => {
     const today = new Date();
@@ -49,12 +53,23 @@ const ProfileCard = () => {
     return age;
   };
 
+  if (!profile) {
+    return (
+      <div className="col-span-12 lg:col-span-4 lg:h-screen lg:sticky top-44">
+        <div className="w-full mb-6 lg:mb-0 mx-auto relative bg-white text-center dark:bg-[#111111] px-6 rounded-[20px] mt-[180px] md:mt-[220px] lg:mt-0 ">
+          <div className="pt-[100px] pb-8">
+            <h1 className="mt-6 mb-1 text-4xl font-semibold dark:text-white">
+              Loading
+            </h1>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="col-span-12 lg:col-span-4 lg:h-screen lg:sticky top-44">
       <div className="w-full mb-6 lg:mb-0 mx-auto relative bg-white text-center dark:bg-[#111111] px-6 rounded-[20px] mt-[180px] md:mt-[220px] lg:mt-0 ">
-        {loading ? (
-          <p>Loading</p>
-        ) : (
           <>
             <Image
               loader={({ src }) => src}
@@ -161,7 +176,7 @@ const ProfileCard = () => {
                     <p className="text-xs text-[#44566C] dark:text-[#A6A6A6]">
                       Age
                     </p>
-                    <p className="dark:text-white break-all">{birthday}</p>
+                    <p className="dark:text-white break-all">{birthday} ans</p>
                   </div>
                 </div>
               </div>
@@ -183,7 +198,6 @@ const ProfileCard = () => {
               </Link>
             </div>
           </>
-        )}
       </div>
     </div>
   );

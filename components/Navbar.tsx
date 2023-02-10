@@ -1,8 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { MdCode, MdContacts, MdHome, MdOutlineArticle, MdOutlineContacts } from "react-icons/md";
+import { MdCode, MdHome, MdOutlineArticle, MdOutlineContacts } from "react-icons/md";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const router = useRouter();
+  const currentPath = "w-full h-20 rounded-[10px]  cursor-pointer  font-poppins  bg-[#F3F6F6]  font-medium px-2.5  text-xtiny text-gray-lite dark:text-[#A6A6A6]    justify-center flex flex-col items-center   transition-all duration-300 ease-in-out dark:hover:text-white dark:bg-[#212425] hover:text-white   hover:bg-gradient-to-r from-[#FA5252] to-[#DD2476] lg:text-white lg:dark:text-white   lg:bg-gradient-to-r from-[#FA5252] to-[#DD2476] "
+  const inactivePath = "w-full h-20 rounded-[10px]  cursor-pointer  font-poppins  bg-[#F3F6F6]  font-medium px-2.5  text-xtiny text-gray-lite dark:text-[#A6A6A6]    justify-center flex flex-col items-center   transition-all duration-300 ease-in-out dark:hover:text-white dark:bg-[#212425] hover:text-white   hover:bg-gradient-to-r from-[#FA5252] to-[#DD2476] "
   return (
     <header className="lg:w-[526px] h-[144px] hidden lg:block p-[30px] ml-auto mb-10 rounded-[16px] bg-white dark:bg-[#111111]">
       <nav className="hidden lg:block">
@@ -11,10 +15,10 @@ export default function Navbar() {
             <Link
               href="/"
               title="Accueil"
-              className="w-full h-20 rounded-[10px]  cursor-pointer  font-poppins  bg-[#F3F6F6]  font-medium px-2.5 text-xtiny text-gray-lite dark:text-[#A6A6A6]    justify-center flex flex-col items-center   transition-all duration-300 ease-in-out dark:hover:text-white dark:bg-[#212425] hover:text-white   hover:bg-gradient-to-r from-[#FA5252] to-[#DD2476] lg:text-white lg:dark:text-white   lg:bg-gradient-to-r from-[#FA5252] to-[#DD2476]"
+              className={router.pathname === "/" ? currentPath : inactivePath}
             >
               <span className="text-xl mb-1">
-                <MdHome className="text-[#6AB5B9] text-[20px] " />
+                <MdHome className="text-xl" />
               </span>
               Accueil
             </Link>
@@ -23,22 +27,22 @@ export default function Navbar() {
             <Link
               href="/resume"
               title="Resume"
-              className="w-full h-20 rounded-[10px] cursor-pointer font-poppins bg-[#F3F6F6] font-medium px-2.5 text-xtiny text-gray-lite dark:text-[#A6A6A6] justify-center flex flex-col items-center transition-all duration-300 ease-in-out dark:hover:text-white dark:bg-[#212425] hover:text-white hover:bg-gradient-to-r from-[#FA5252] to-[#DD2476] lg:text-white lg:dark:text-white lg:bg-gradient-to-r from-[#FA5252] to-[#DD2476]"
+              className={router.pathname === "/resume" ? currentPath : inactivePath}
             >
               <span className="text-xl mb-1">
-                <MdOutlineArticle className="text-[#6AB5B9] text-[20px] " />
+                <MdOutlineArticle className="text-xl" />
               </span>
-              Resume
+              Parcours
             </Link>
           </li>
           <li>
             <Link
               href="/projects"
               title="Projets"
-              className="w-full h-20 rounded-[10px]  cursor-pointer  font-poppins  bg-[#F3F6F6]  font-medium px-2.5  text-xtiny text-gray-lite dark:text-[#A6A6A6]    justify-center flex flex-col items-center   transition-all duration-300 ease-in-out dark:hover:text-white dark:bg-[#212425] hover:text-white   hover:bg-gradient-to-r from-[#FA5252] to-[#DD2476] lg:text-white lg:dark:text-white   lg:bg-gradient-to-r from-[#FA5252] to-[#DD2476] "
+              className={router.pathname === "/projects" ? currentPath : inactivePath}
             >
               <span className="text-xl mb-1">
-                <MdCode className="text-[#6AB5B9] text-[20px] " />
+                <MdCode className="text-xl" />
               </span>
               Projets
             </Link>
@@ -47,12 +51,12 @@ export default function Navbar() {
             <Link
               href="/contact"
               title="Contact"
-              className="w-full h-20 rounded-[10px]  cursor-pointer  font-poppins  bg-[#F3F6F6]  font-medium px-2.5  text-xtiny text-gray-lite dark:text-[#A6A6A6]    justify-center flex flex-col items-center   transition-all duration-300 ease-in-out dark:hover:text-white dark:bg-[#212425] hover:text-white   hover:bg-gradient-to-r from-[#FA5252] to-[#DD2476] lg:text-white lg:dark:text-white   lg:bg-gradient-to-r from-[#FA5252] to-[#DD2476] "
+              className={router.pathname === "/contact" ? currentPath : inactivePath}
             >
               <span className="text-xl mb-1">
-                <MdOutlineContacts className="text-[#6AB5B9] text-[20px] " />
+                <MdOutlineContacts className="text-xl" />
               </span>
-              Accueil
+              Contact
             </Link>
           </li>
         </ul>

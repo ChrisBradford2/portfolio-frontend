@@ -7,18 +7,17 @@ import React, { useState } from "react";
 const Contact: React.FC = () => {
   return (
     <>
-      {/* SEO 
       <Head>
-        <title>{seo.metaTitle}</title>
+        <title>Nicolas Barbarisi - Contact</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link rel="canonical" href={seo.canonicalURL} />
-        <meta name="viewport" content={seo.metaViewport} />
-        <meta name="description" content={seo.metaDescription} />
-        <meta name="keywords" content={seo.keywords} />
-        <meta name="author" content={seo.metaAuthor} />
-        <meta name="robots" content={seo.metaRobots} />
-      </Head>*/}
+        <link rel="canonical" href="https://www.nicolas-barbarisi.com/contact" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Nicolas Barbarisi's portfolio" />
+        <meta name="keywords" content="Nicolas Barbarisi, Portfolio" />
+        <meta name="author" content="Nicolas Barbarisi" />
+        <meta name="robots" content="index, follow" />
+      </Head>
       <main className="bg-homeBg min-h-screen bg-no-repeat bg-center bg-cover bg-fixed dark:bg-homeTwoBg-dark md:pb-16 w-full">
         <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:pt-[220px]">
           <ProfileCard />
