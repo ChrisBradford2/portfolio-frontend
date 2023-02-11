@@ -29,7 +29,12 @@ a.current-path {
 }
 
 .after-effect {
-    @apply relative inline-block font-bold text-header after:absolute after:top-2/4 after:h-0.5 after:rounded-md after:bg-gradient-to-r from-orange-400 to-red-500 after:transform after:-translate-y-2/4 after:md:w-52;
+    @apply relative inline-block font-bold text-header after:absolute after:top-2/4 after:h-0.5 after:rounded-md after:transform after:-translate-y-2/4 after:md:w-52;
+}
+
+.after-effect:after {
+  animation: rainbow .5s ease-in-out infinite;
+  background: linear-gradient(124deg, #FA5252, #DD2476);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -38,4 +43,10 @@ a.current-path {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes rainbow {
+  0%{background-position:0% 82%}
+  50%{background-position:100% 19%}
+  100%{background-position:0% 82%}
 }

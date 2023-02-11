@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import Container from "@/components/Container";
 import * as yup from 'yup';
 import { MdCheckCircle, MdError } from "react-icons/md";
-import { cp } from "fs";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 interface Inputs {
   firstName: string;
@@ -57,12 +58,32 @@ export default function Contact() {
         subject: "",
         message: "",
       });
+      toast.success("Message envoyé ! 👍", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     } else {
       setError(true);
       setStatus((prevStatus) => ({
         ...prevStatus,
         info: { error: true, msg: msg },
       }));
+      toast.error("Une erreur est survenue 😢", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -134,6 +155,7 @@ export default function Contact() {
         <meta name="author" content="Nicolas Barbarisi" />
         <meta name="robots" content="index, follow" />
       </Head>
+      <ToastContainer />
       <Container>
         <div className="container px-4 sm:px-5 md:px-10 lg:px-14">
           <div className="py-12">
@@ -260,7 +282,7 @@ export default function Contact() {
                   </button>
                 </div>
               </form>
-              {sent && (
+              {/*sent && (
                 <div className="flex items-center border-l-4 p-4 bg-[#1D1D1D] border-[#34D399] mt-12">
                   <div className="text-[#34D399] rounded-full mr-3 bg-[#1D1D1D]">
                     <MdCheckCircle />
@@ -272,8 +294,8 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
-              )}
-              {error && (
+              )*/}
+              {/* error && (
                 <div className="flex items-center border-l-4 p-4 bg-[#1D1D1D] border-[#F87171] mt-12">
                   <div className="text-[#F87171] rounded-full mr-3 bg-[#1D1D1D]">
                     <MdError />
@@ -285,7 +307,7 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
-              )}
+              )*/}
             </div>
           </div>
         </div>
