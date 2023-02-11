@@ -33,7 +33,7 @@ const Resume = ({ data, error, seo }: Props) => {
       <Container>
         <div className="container px-4 sm:px-5 md:px-10 lg:px-14">
           <div className="py-12">
-            <h2 className="after-effect after:left-56">
+            <h2 className="after-effect after:left-44">
               {data.data.attributes.title}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-6 gap-y-6 mt-[30px]">

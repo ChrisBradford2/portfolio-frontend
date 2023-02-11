@@ -159,7 +159,7 @@ export default function Contact() {
       <Container>
         <div className="container px-4 sm:px-5 md:px-10 lg:px-14">
           <div className="py-12">
-            <h2 className="after-effect after:left-48 mt-12 lg:mt-0 mb-12 md:mb-[30px]">
+            <h2 className="after-effect after:left-44 mt-12 lg:mt-0 mb-12 md:mb-[30px]">
               Contact
             </h2>
             <div className="border-[#212425] border-2 mb-8 md:p-[48px] p-4 bg-color-810 rounded-xl">
