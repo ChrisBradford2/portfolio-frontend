@@ -2,7 +2,9 @@ import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import ProfileCard from '@/components/ProfileCard';
 import Navbar from '@/components/Navbar';
-import Body from '@/components/Body';
+import { GetStaticProps } from 'next';
+import Education from '@/components/Education';
+import Experience from '@/components/Experience';
 import Container from '@/components/Container';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -10,21 +12,10 @@ const inter = Inter({ subsets: ['latin'] });
 interface Props {
   data: any;
   error: any;
-  body: any;
-  school: any;
-  professional_experience: any;
-  profile: any;
-  skills: any;
   seo: any;
 }
 
-const Home = ({
-  data,
-  body,
-  profile,
-  skills,
-  seo,
-}: Props) => {
+const Resume = ({ data, error, seo }: Props) => {
   return (
     <>
       <Head>
@@ -40,34 +31,49 @@ const Home = ({
       </Head>
 
       <Container>
-        <Body body={body} skills={skills} skills_title={data.data.attributes.skills_title} />
+        <div className="container px-4 sm:px-5 md:px-10 lg:px-14">
+          <div className="py-12">
+            <h2 className="after-effect after:left-44">
+              {data.data.attributes.title}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-6 gap-y-6 mt-[30px]">
+              <Education
+                education={data.data.attributes.education}
+                title={data.data.attributes.education_title}
+              />
+              <Experience
+                experience={data.data.attributes.experience}
+                title={data.data.attributes.experience_title}
+              />
+            </div>
+          </div>
+        </div>
       </Container>
     </>
   );
 };
 
-// Get data from Strapi with the token from the environment variable
-export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.API_URL}/api/homepage?populate[]=seo&populate[]=body&populate[]=skills.languages`, {
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch(`${process.env.API_URL}/api/resume?populate=*`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
     },
   });
   const data = await res.json();
   const error = data.error || null;
+  const education = data.data.attributes.education;
+  const experience = data.data.attributes.experience;
   const seo = data.data.attributes.seo;
-  const body = data.data.attributes.body;
-  const skills = data.data.attributes.skills;
 
   return {
     props: {
       data,
       error,
-      body,
-      skills,
+      education,
+      experience,
       seo,
     },
   };
 };
 
-export default Home;
+export default Resume;
