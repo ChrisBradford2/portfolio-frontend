@@ -2,7 +2,10 @@
 const nextConfig = {
   // reactStrictMode: true,
   images: {
-    domains: ['localhost'],
+    domains: [
+      'localhost',
+      'nicolas-barbarisi-backend.herokuapp.com'
+    ],
   },
   env: {
     API_URL: process.env.API_URL,

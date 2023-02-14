@@ -48,8 +48,7 @@ const Home = ({
 
 // Get data from Strapi with the token from the environment variable
 export const getStaticProps = async () => {
-  const query = '?populate[]=seo&populate[]=body&populate[]=skills.languages';
-  const res = await fetch(`${process.env.API_URL}/api/homepage${query}`, {
+  const res = await fetch(`${process.env.API_URL}/api/homepage?populate[]=seo&populate[]=body&populate[]=skills.languages`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
     },
