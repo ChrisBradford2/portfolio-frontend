@@ -1,11 +1,11 @@
-import Head from "next/head";
-import { Inter } from "@next/font/google";
-import ProfileCard from "@/components/ProfileCard";
-import Navbar from "@/components/Navbar";
-import Body from "@/components/Body";
-import Container from "@/components/Container";
+import Head from 'next/head';
+import { Inter } from '@next/font/google';
+import ProfileCard from '@/components/ProfileCard';
+import Navbar from '@/components/Navbar';
+import Body from '@/components/Body';
+import Container from '@/components/Container';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 interface Props {
   data: any;
@@ -48,7 +48,7 @@ const Home = ({
 
 // Get data from Strapi with the token from the environment variable
 export const getStaticProps = async () => {
-  const query = `?populate[]=seo&populate[]=body&populate[]=skills.languages`;
+  const query = '?populate[]=seo&populate[]=body&populate[]=skills.languages';
   const res = await fetch(`${process.env.API_URL}/api/homepage${query}`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,

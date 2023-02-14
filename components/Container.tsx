@@ -2,8 +2,8 @@ import React from 'react';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import ProfileCard from './ProfileCard';
-import AOS from "aos";
-import "aos/dist/aos.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 interface Props {
     children: React.ReactNode;
 }

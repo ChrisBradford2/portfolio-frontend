@@ -1,8 +1,8 @@
-import Link from "next/link";
-import React from "react";
-import { MdCode, MdHome, MdOutlineArticle, MdOutlineContacts } from "react-icons/md";
-import { SiSpinrilla } from "react-icons/si";
-import { useRouter } from "next/router";
+import Link from 'next/link';
+import React from 'react';
+import { MdCode, MdHome, MdOutlineArticle, MdOutlineContacts } from 'react-icons/md';
+import { SiSpinrilla } from 'react-icons/si';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
   const router = useRouter();
@@ -22,11 +22,11 @@ const Navbar = () => {
             <Link
               href="/"
               title="Accueil"
-              className={`inactive-path${router.pathname === "/" ? " current-path" : ""}`}
-              onClick={() => handleClick("/")}
+              className={`inactive-path${'/' === router.pathname ? ' current-path' : ''}`}
+              onClick={() => handleClick('/')}
             >
               <span className="text-xl mb-1">
-                {isLoading === '/' ? <SiSpinrilla className="animate-spin" /> : <MdHome className="text-xl" />}
+                {'/' === isLoading ? <SiSpinrilla className="animate-spin" /> : <MdHome className="text-xl" />}
               </span>
               Accueil
             </Link>
@@ -35,11 +35,11 @@ const Navbar = () => {
             <Link
               href="/resume"
               title="Resume"
-              className={`inactive-path${router.pathname === "/resume" ? " current-path" : ""}`}
-              onClick={() => handleClick("/resume")}
+              className={`inactive-path${'/resume' === router.pathname ? ' current-path' : ''}`}
+              onClick={() => handleClick('/resume')}
             >
               <span className="text-xl mb-1">
-                {isLoading === "/resume" ? <SiSpinrilla className="animate-spin" /> : <MdOutlineArticle className="text-xl" />}
+                {'/resume' === isLoading ? <SiSpinrilla className="animate-spin" /> : <MdOutlineArticle className="text-xl" />}
               </span>
               Parcours
             </Link>
@@ -48,11 +48,11 @@ const Navbar = () => {
             <Link
               href="/projects"
               title="Projets"
-              className={`inactive-path${router.pathname === "/projects" ? " current-path" : ""}`}
-              onClick={() => handleClick("/projects")}
+              className={`inactive-path${'/projects' === router.pathname ? ' current-path' : ''}`}
+              onClick={() => handleClick('/projects')}
             >
               <span className="text-xl mb-1">
-                {isLoading === "/projects" ? <SiSpinrilla className="animate-spin" /> : <MdCode className="text-xl" />}
+                {'/projects' === isLoading ? <SiSpinrilla className="animate-spin" /> : <MdCode className="text-xl" />}
               </span>
               Projets
             </Link>
@@ -61,11 +61,11 @@ const Navbar = () => {
             <Link
               href="/contact"
               title="Contact"
-              className={`inactive-path${router.pathname === "/contact" ? " current-path" : ""}`}
-              onClick={() => handleClick("/contact")}
+              className={`inactive-path${'/contact' === router.pathname ? ' current-path' : ''}`}
+              onClick={() => handleClick('/contact')}
             >
               <span className="text-xl mb-1">
-                {isLoading === "/contact" ? <SiSpinrilla className="animate-spin" /> : <MdOutlineContacts className="text-xl" />}
+                {'/contact' === isLoading ? <SiSpinrilla className="animate-spin" /> : <MdOutlineContacts className="text-xl" />}
               </span>
               Contact
             </Link>
@@ -74,6 +74,6 @@ const Navbar = () => {
       </nav>
     </header>
   );
-}
+};
 
 export default Navbar;

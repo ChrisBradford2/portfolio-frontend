@@ -1,8 +1,8 @@
-import Head from "next/head";
-import React, { useState } from "react";
-import Container from "@/components/Container";
+import Head from 'next/head';
+import React, { useState } from 'react';
+import Container from '@/components/Container';
 import * as yup from 'yup';
-import { MdCheckCircle, MdError } from "react-icons/md";
+import { MdCheckCircle, MdError } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -25,11 +25,11 @@ interface Status {
 
 export default function Contact() {
   const [inputs, setInputs] = useState<Inputs>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    subject: "",
-    message: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    subject: '',
+    message: '',
   });
 
   const [resStatus, setStatus] = useState<Status>({
@@ -41,10 +41,10 @@ export default function Contact() {
   const [sent, setSent] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
-  const allFieldsFilled = Object.values(inputs).every(input => input !== '')
+  const allFieldsFilled = Object.values(inputs).every(input => '' !== input);
 
   const handleResponse = (resStatus: number, msg: string) => {
-    if (resStatus === 200) {
+    if (200 === resStatus) {
       setSent(true);
       setStatus({
         submitted: true,
@@ -52,21 +52,21 @@ export default function Contact() {
         info: { error: false, msg: msg },
       });
       setInputs({
-        firstName: "",
-        lastName: "",
-        email: "",
-        subject: "",
-        message: "",
+        firstName: '',
+        lastName: '',
+        email: '',
+        subject: '',
+        message: '',
       });
-      toast.success("Message envoyé ! 👍", {
-        position: "top-right",
+      toast.success('Message envoyé ! 👍', {
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
     } else {
       setError(true);
@@ -74,15 +74,15 @@ export default function Contact() {
         ...prevStatus,
         info: { error: true, msg: msg },
       }));
-      toast.error("Une erreur est survenue 😢", {
-        position: "top-right",
+      toast.error('Une erreur est survenue 😢', {
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
     }
   };
@@ -128,10 +128,10 @@ export default function Contact() {
       setError(false);
     }
     setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
-    const res = await fetch("/api/contact", {
-      method: "POST",
+    const res = await fetch('/api/contact', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(inputs),
     });
@@ -165,7 +165,7 @@ export default function Contact() {
             <div className="border-[#212425] border-2 mb-8 md:p-[48px] p-4 bg-color-810 rounded-xl">
               <h3 className="text-2xl font-bold mb-4">Je peux vous aider ?</h3>
               <p className="mb-4">
-                N'hésitez pas à me contacter via le formulaire ci-dessous.
+                N&apos;hésitez pas à me contacter via le formulaire ci-dessous.
               </p>
               <form
                 className="w-full max-w-lg mx-auto mt-12"
@@ -185,7 +185,7 @@ export default function Contact() {
                         onChange={handleChange}
                       />
                     </label>
-                    {inputs.firstName === "" && resStatus.info.error && (
+                    {'' === inputs.firstName && resStatus.info.error && (
                       <p className="text-red-500 text-xs italic">
                         Veuillez renseigner votre prénom
                       </p>
@@ -203,7 +203,7 @@ export default function Contact() {
                         onChange={handleChange}
                       />
                     </label>
-                    {inputs.lastName === "" && resStatus.info.error && (
+                    {'' === inputs.lastName && resStatus.info.error && (
                       <p className="text-red-500 text-xs italic">
                         Veuillez renseigner votre nom
                       </p>
@@ -223,7 +223,7 @@ export default function Contact() {
                         onChange={handleChange}
                       />
                     </label>
-                    {inputs.email === "" && resStatus.info.error && (
+                    {'' === inputs.email && resStatus.info.error && (
                       <p className="text-red-500 text-xs italic">
                         Veuillez renseigner votre email
                       </p>
@@ -243,9 +243,9 @@ export default function Contact() {
                         onChange={handleChange}
                       />
                     </label>
-                    {inputs.subject === "" && resStatus.info.error && (
+                    {'' === inputs.subject && resStatus.info.error && (
                       <p className="text-red-500 text-xs italic">
-                        Veuillez renseigner l'objet de votre message
+                        Veuillez renseigner l&apos;objet de votre message
                       </p>
                     )}
                   </div>
@@ -263,7 +263,7 @@ export default function Contact() {
                         name="message"
                       />
                     </label>
-                    {inputs.message === "" && resStatus.info.error && (
+                    {'' === inputs.message && resStatus.info.error && (
                       <p className="text-red-500 text-xs italic">
                         Veuillez renseigner votre message
                       </p>
@@ -273,8 +273,8 @@ export default function Contact() {
                 <div className="flex justify-center">
                   <button
                     className={`inline-flex items-center mx-auto px-8 py-3 text-lg rounded-[35px] mt-6 ${
-                        !allFieldsFilled && "bg-[#1D1D1D] text-[#A6A6A6] cursor-not-allowed"
-                      } ${allFieldsFilled && "bg-gradient-to-r from-[#FA5252] to-[#DD2476] ease-linear hover:animate-pulse text-white"}`}
+                        !allFieldsFilled && 'bg-[#1D1D1D] text-[#A6A6A6] cursor-not-allowed'
+                      } ${allFieldsFilled && 'bg-gradient-to-r from-[#FA5252] to-[#DD2476] ease-linear hover:animate-pulse text-white'}`}
                     type="submit"
                     disabled={!allFieldsFilled}
                   >

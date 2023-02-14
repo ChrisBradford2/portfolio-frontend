@@ -1,13 +1,13 @@
-import Head from "next/head";
-import { Inter } from "@next/font/google";
-import ProfileCard from "@/components/ProfileCard";
-import Navbar from "@/components/Navbar";
-import { GetStaticProps } from "next";
-import Education from "@/components/Education";
-import Experience from "@/components/Experience";
-import Container from "@/components/Container";
+import Head from 'next/head';
+import { Inter } from '@next/font/google';
+import ProfileCard from '@/components/ProfileCard';
+import Navbar from '@/components/Navbar';
+import { GetStaticProps } from 'next';
+import Education from '@/components/Education';
+import Experience from '@/components/Experience';
+import Container from '@/components/Container';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 interface Props {
   data: any;

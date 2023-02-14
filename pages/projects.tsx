@@ -1,22 +1,22 @@
-import Head from "next/head";
-import { Inter } from "@next/font/google";
-import { GetStaticProps } from "next";
-import React from "react";
-import Modal from "react-modal";
-import Image from "next/image";
-import HTMLReactParser from "html-react-parser";
-import Link from "next/link";
+import Head from 'next/head';
+import { Inter } from '@next/font/google';
+import { GetStaticProps } from 'next';
+import React from 'react';
+import Modal from 'react-modal';
+import Image from 'next/image';
+import HTMLReactParser from 'html-react-parser';
+import Link from 'next/link';
 import {
   FaChartPie,
   FaCode,
   FaGithub,
   FaGitlab,
-} from "react-icons/fa";
-import { VscAzure } from "react-icons/vsc";
-import { MdOpenInNew } from "react-icons/md";
-import Container from "@/components/Container";
+} from 'react-icons/fa';
+import { VscAzure } from 'react-icons/vsc';
+import { MdOpenInNew } from 'react-icons/md';
+import Container from '@/components/Container';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 interface Props {
   data: any;
@@ -48,10 +48,10 @@ interface Project {
 
 const Projects = ({ data, error }: Props) => {
   React.useEffect(() => {
-    Modal.setAppElement("body");
+    Modal.setAppElement('body');
   }, []);
 
-  const [selectedCategory, setSelectedCategory] = React.useState("All");
+  const [selectedCategory, setSelectedCategory] = React.useState('All');
 
   const handleCategory = (category: string) => {
     setSelectedCategory(category);
@@ -60,7 +60,7 @@ const Projects = ({ data, error }: Props) => {
   const filteredData = data.data.filter(
     (project: any) =>
       project.attributes.project_type === selectedCategory ||
-      selectedCategory === "All"
+      'All' === selectedCategory
   );
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -116,26 +116,26 @@ const Projects = ({ data, error }: Props) => {
             <h2 className="after-effect after:left-40">Projets</h2>
             <ul className="mt-[40px] flex w-full justify-start md:justify-end flex-wrap font-medium pb-12">
               <li
-                className={`${selectedCategory === "All" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
-                onClick={() => handleCategory("All")}
+                className={`${'All' === selectedCategory ? 'text-[#FA5252]' : 'text-[#A6A6A6]'} mr-4 md:mx-4 cursor-pointer`}
+                onClick={() => handleCategory('All')}
               >
                 All
               </li>
               <li
-                className={`${selectedCategory === "Company" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
-                onClick={() => handleCategory("Company")}
+                className={`${'Company' === selectedCategory ? 'text-[#FA5252]' : 'text-[#A6A6A6]'} mr-4 md:mx-4 cursor-pointer`}
+                onClick={() => handleCategory('Company')}
               >
                 Company
               </li>
               <li
-                className={`${selectedCategory === "Personal" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
-                onClick={() => handleCategory("Personal")}
+                className={`${'Personal' === selectedCategory ? 'text-[#FA5252]' : 'text-[#A6A6A6]'} mr-4 md:mx-4 cursor-pointer`}
+                onClick={() => handleCategory('Personal')}
               >
                 Personal
               </li>
               <li
-                className={`${selectedCategory === "School" ? "text-[#FA5252]" : "text-[#A6A6A6]"} mr-4 md:mx-4 cursor-pointer`}
-                onClick={() => handleCategory("School")}
+                className={`${'School' === selectedCategory ? 'text-[#FA5252]' : 'text-[#A6A6A6]'} mr-4 md:mx-4 cursor-pointer`}
+                onClick={() => handleCategory('School')}
               >
                 School
               </li>
@@ -175,14 +175,14 @@ const Projects = ({ data, error }: Props) => {
         onRequestClose={closeModal}
         style={{
           overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
             zIndex: 1000,
           },
           content: {
-            position: "initial",
-            border: "none",
-            background: "none",
-            overflow: "visible",
+            position: 'initial',
+            border: 'none',
+            background: 'none',
+            overflow: 'visible',
             padding: 0,
           },
         }}
@@ -209,14 +209,14 @@ const Projects = ({ data, error }: Props) => {
                 <div className="space-y-2">
                   <p className="text-white flex items-center mt-2 lg:mt-0 text-[15px] sm:text-lg ">
                     <FaChartPie className="mr-2" />
-                    Project Type:{" "}
+                    Project Type:{' '}
                     <span className="text-[#ef4060] hover:text-[#FA5252] font-medium ml-2">
                       {selectedProject.attributes.project_type}
                     </span>
                   </p>
                   <p className="text-white flex items-center text-[15px] sm:text-lg ">
                     <FaCode className="mr-2" />
-                    Language :{" "}
+                    Language :{' '}
                     {selectedProject.attributes.languages.data.map(
                       (language: any) => (
                         <span
@@ -224,8 +224,8 @@ const Projects = ({ data, error }: Props) => {
                           className="text-[#ef4060] hover:text-[#FA5252] font-medium ml-2"
                         >
                           {language.attributes.name}
-                          {selectedProject.attributes.languages.data.length >
-                            1 &&
+                          {1 <
+                            selectedProject.attributes.languages.data.length &&
                             selectedProject.attributes.languages.data.indexOf(
                               language
                             ) !==
@@ -240,16 +240,16 @@ const Projects = ({ data, error }: Props) => {
                   {selectedProject.attributes.repo_type && (
                     <>
                       <p className="text-white flex items-center mt-2 text-[15px] sm:text-lg ">
-                        {selectedProject.attributes.repo_type === "Github" ? (
+                        {'Github' === selectedProject.attributes.repo_type ? (
                           <FaGithub className="mr-2" />
-                        ) : selectedProject.attributes.repo_type ===
-                          "Gitlab" ? (
+                        ) : 'Gitlab' ===
+                          selectedProject.attributes.repo_type ? (
                           <FaGitlab className="mr-2" />
                         ) : (
                           <VscAzure className="mr-2" />
                         )}
                         {selectedProject.attributes.repo_type}
-                        {" :"}
+                        {' :'}
                         <Link
                           href={selectedProject.attributes.repo_link}
                           target="_blank"
@@ -265,12 +265,12 @@ const Projects = ({ data, error }: Props) => {
                   {selectedProject.attributes.preview_link && (
                     <p className="text-white flex items-center text-[15px] sm:text-lg ">
                       <MdOpenInNew className="mr-2" />
-                      Preview{" : "}
+                      Preview{' : '}
                       <Link
                         href={selectedProject.attributes.preview_link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        title={`Lien vers la preview`}
+                        title={'Lien vers la preview'}
                         className="text-[#ef4060] hover:text-[#FA5252] font-medium ml-2"
                       >
                         {selectedProject.attributes.preview_link}

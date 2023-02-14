@@ -1,5 +1,5 @@
-import { MdSchool } from "react-icons/md";
-import getYear from "../lib/getYear";
+import { MdSchool } from 'react-icons/md';
+import getYear from '../lib/getYear';
 
 interface Props {
   education: any;
@@ -20,7 +20,7 @@ const Education = ({ education, title }: Props) => {
         <div className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg border-[#212425] border-2" key={school.id}>
           <div key={school.id}>
             <span className="text-tiny text-[#b7b7b7]">
-              {getYear(school.start_date)} - {school.end_date ? getYear(school.end_date) : "Present"}
+              {getYear(school.start_date)} - {school.end_date ? getYear(school.end_date) : 'Present'}
             </span>
             <h3 className="text-lg font-semibold text-white">
               {school.grade_name}

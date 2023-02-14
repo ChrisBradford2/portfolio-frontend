@@ -1,8 +1,8 @@
 // Get profile information from Strapi and display it in the ProfileCard component
 
-import Link from "next/link";
-import React, { useEffect } from "react";
-import Image from "next/image";
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+import Image from 'next/image';
 import {
   MdPhoneIphone,
   MdLocationOn,
@@ -10,8 +10,8 @@ import {
   MdCalendarToday,
   MdDownload,
   MdCheckCircle,
-} from "react-icons/md";
-import { FaLinkedin, FaGithub, FaGitlab, FaDrupal, FaWordpress } from "react-icons/fa";
+} from 'react-icons/md';
+import { FaLinkedin, FaGithub, FaGitlab, FaDrupal, FaWordpress } from 'react-icons/fa';
 
 const ProfileCard = () => {
   // Fetch the data from Strapi and display it in the ProfileCard component``
@@ -47,7 +47,7 @@ const ProfileCard = () => {
     const birthDate = new Date(date);
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    if (0 > m || (0 === m && today.getDate() < birthDate.getDate())) {
       age--;
     }
     return age;
@@ -78,7 +78,7 @@ const ProfileCard = () => {
               height={profile.avatar.data.attributes.formats.thumbnail.height}
               title={profile.avatar.data.attributes.caption || null}
               alt={profile.avatar.data.attributes.alternativeText || null}
-              className="w-[240px] absolute left-[50%] transform -translate-x-[50%] h-[240px] drop-shadow-xl mx-auto rounded-[20px] -mt-[140px]"
+              className="w-[240px] absolute left-[50%] transform -translate-x-[50%] h-[240px] drop-shadow-xl mx-auto rounded-[20px] -mt-[140px] object-cover"
             />
             <div className="pt-[100px] pb-8">
               <h1 className="mt-6 mb-1 text-4xl font-semibold text-white">
@@ -202,7 +202,7 @@ const ProfileCard = () => {
               >
                 <MdDownload className="mr-2" />
                 {(profile.resume && profile.resume.data.attributes.caption) ||
-                  "null"}
+                  'null'}
               </Link>
             </div>
           </>

@@ -1,5 +1,5 @@
-import React from "react";
-import HTMLReactParser from "html-react-parser";
+import React from 'react';
+import HTMLReactParser from 'html-react-parser';
 
 interface Props {
   body: any;
