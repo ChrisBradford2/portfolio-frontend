@@ -1,7 +1,5 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import ProfileCard from "@/components/ProfileCard";
-import Navbar from "@/components/Navbar";
 import { GetStaticProps } from "next";
 import React from "react";
 import Modal from "react-modal";
@@ -181,12 +179,7 @@ const Projects = ({ data, error }: Props) => {
             zIndex: 1000,
           },
           content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
+            position: "initial",
             border: "none",
             background: "none",
             overflow: "visible",
@@ -197,11 +190,16 @@ const Projects = ({ data, error }: Props) => {
       >
         {selectedProject && (
           <div className="w-full md:w-10/12 items-center lg:w-[850px] bg-white bg-[#323232] mx-auto rounded-xl p-4 md:p-8 absolute left-1/2 top-1/2 transform -translate-x-[50%] -translate-y-[50%] shadow-lg z-50 overflow-auto max-h-[90vh] no-scrollbar">
+            <button
+              className="absolute top-4 right-4 text-[#FA5252] hover:text-[#FA5252] text-2xl font-bold"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
             <div className=" overflow-hidden rounded-lg">
               <h2 className="text-[#ef4060] hover:text-[#FA5252] text-4xl text-center font-bold">
                 {selectedProject.attributes.title}
               </h2>
-              {/* Subtitle with the year with Tailwind CSS badge */}
               <div className="flex justify-center items-center">
                 <span className="bg-[#ef4060] hover:bg-[#FA5252] text-white text-xs font-bold rounded-full px-2 py-1">
                   {selectedProject.attributes.release_year}
@@ -241,7 +239,7 @@ const Projects = ({ data, error }: Props) => {
                 <div className="space-y-2">
                   {selectedProject.attributes.repo_type && (
                     <>
-                      <p className="text-white flex items-center text-[15px] sm:text-lg ">
+                      <p className="text-white flex items-center mt-2 text-[15px] sm:text-lg ">
                         {selectedProject.attributes.repo_type === "Github" ? (
                           <FaGithub className="mr-2" />
                         ) : selectedProject.attributes.repo_type ===
