@@ -51,7 +51,7 @@ const Resume = ({ data, seo, profileData }: Props) => {
   );
 };
 
-export const getServersideProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch(`${process.env.API_URL}/api/resume?populate=*`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,

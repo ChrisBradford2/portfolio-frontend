@@ -297,7 +297,7 @@ const Projects = ({ data, profileData }: Props) => {
   );
 };
 
-export const getServersideProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch(`${process.env.API_URL}/api/projects?populate=*`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
