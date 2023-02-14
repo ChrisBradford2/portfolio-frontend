@@ -320,7 +320,7 @@ export default function Contact({ profileData }: Props) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServersideProps = async () => {
   const profile = await fetch(`${process.env.API_URL}/api/profile?populate=*`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,

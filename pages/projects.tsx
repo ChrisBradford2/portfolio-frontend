@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
-import { GetStaticProps } from 'next';
 import React from 'react';
 import Modal from 'react-modal';
 import Image from 'next/image';
@@ -298,7 +297,7 @@ const Projects = ({ data, profileData }: Props) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServersideProps = async () => {
   const res = await fetch(`${process.env.API_URL}/api/projects?populate=*`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,

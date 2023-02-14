@@ -1,8 +1,5 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
-import ProfileCard from '@/components/ProfileCard';
-import Navbar from '@/components/Navbar';
-import { GetStaticProps } from 'next';
 import Education from '@/components/Education';
 import Experience from '@/components/Experience';
 import Container from '@/components/Container';
@@ -54,7 +51,7 @@ const Resume = ({ data, seo, profileData }: Props) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServersideProps = async () => {
   const res = await fetch(`${process.env.API_URL}/api/resume?populate=*`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
