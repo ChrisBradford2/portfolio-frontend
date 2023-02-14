@@ -110,11 +110,13 @@ const ProfileCard = () => {
                   </span>
                 </Link>
 
-                <Link href={profile.link_drupal} title="Drupal" target="_blank">
-                  <span className="socialbtn text-[#0578BE] bg-[#1D1D1D]">
-                    <FaDrupal />
-                  </span>
-                </Link>
+                {profile.link_drupal && (
+                  <Link href={profile.link_drupal} title="Drupal" target="_blank">
+                    <span className="socialbtn text-[#0578BE] bg-[#1D1D1D]">
+                      <FaDrupal />
+                    </span>
+                  </Link>
+                )}
 
                 <Link href={profile.link_blog} title="Blog" target="_blank">
                   <span className="socialbtn text-[#44566C] bg-[#1D1D1D]">

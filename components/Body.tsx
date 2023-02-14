@@ -23,13 +23,13 @@ const Body = ({ body, skills, skills_title }: Props) => {
           {skills_title}
         </h3>
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2 ">
-          {skills.map((group: any) => (
-            <div className="border-2 bg-transparent flex rounded-xl gap-4 border-gray-600 p-6" key={group.id}>
+          {skills.map((skill: any) => (
+            <div className="border-2 bg-transparent flex rounded-xl gap-4 border-gray-600 p-6" key={skill.id}>
                 <div className="space-y-2 break-all">
-                    <h4 className="text-white text-xl font-semibold">{group.title}</h4>
+                    <h4 className="text-white text-xl font-semibold">{skill.title}</h4>
                     <ul className="flex gap-x-3 gap-y-3 md:gap-y-3 md:gap-x-3 flex-wrap mt-8">
-                        {group.skill.map((item: any) => (
-                            <li className="inline-block bg-[#1D1D1D] px-5 py-1.5 rounded-lg text-[#A6A6A6]" key={item.id}>{item.name}</li>
+                        {skill.languages.data.map((language: any) => (
+                            <li className="inline-block bg-[#1D1D1D] px-5 py-1.5 rounded-lg text-[#A6A6A6]" key={language.id}>{language.attributes.name}</li>
                         ))}
                     </ul>
                 </div>
