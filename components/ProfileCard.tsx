@@ -13,34 +13,12 @@ import {
 } from 'react-icons/md';
 import { FaLinkedin, FaGithub, FaGitlab, FaDrupal, FaWordpress } from 'react-icons/fa';
 
-const ProfileCard = () => {
-  // Fetch the data from Strapi and display it in the ProfileCard component``
+interface Props {
+  profileData: any;
+}
 
-  const [profile, setProfile] = React.useState<any>(null);
-  const [loading, setLoading] = React.useState<boolean>(true);
+const ProfileCard = ({profileData}: Props) => {
   const [birthday, setBirthday] = React.useState<any>(null);
-
-  useEffect(() => {
-    const storedData = localStorage.getItem('profileData');
-    if (storedData) {
-      setProfile(JSON.parse(storedData));
-      setLoading(false);
-      setBirthday(getAge(JSON.parse(storedData).birthday));
-    }
-    const fetchProfile = async () => {
-      const res = await fetch(`${process.env.API_URL}/api/profile?populate=*`, {
-        headers: {
-          Authorization: `Bearer ${process.env.API_TOKEN}`,
-        },
-      });
-      const data = await res.json();
-      setProfile(data.data.attributes);
-      setLoading(false);
-      setBirthday(getAge(data.data.attributes.birthday));
-      localStorage.setItem('profileData', JSON.stringify(data.data.attributes));
-    };
-    fetchProfile();
-  }, []);
 
   const getAge = (date: string) => {
     const today = new Date();
@@ -53,55 +31,41 @@ const ProfileCard = () => {
     return age;
   };
 
-  if (!profile) {
-    return (
-      <div className="col-span-12 lg:col-span-4 lg:h-screen lg:sticky top-44">
-        <div className="w-full mb-6 lg:mb-0 mx-auto relative text-center bg-[#111111] px-6 rounded-[20px] mt-[180px] md:mt-[220px] lg:mt-0 ">
-          <div className="pt-[100px] pb-8">
-            <h1 className="mt-6 mb-1 text-4xl font-semibold text-white">
-              Loading
-            </h1>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="col-span-12 lg:col-span-4 lg:h-screen lg:sticky top-44">
       <div className="w-full mb-6 lg:mb-0 mx-auto relative text-center bg-[#111111] px-6 rounded-[20px] mt-[180px] md:mt-[220px] lg:mt-0 ">
           <>
             <Image
               priority
-              src={`${process.env.API_URL}${profile.avatar.data.attributes.url}`}
-              width={profile.avatar.data.attributes.formats.thumbnail.width}
-              height={profile.avatar.data.attributes.formats.thumbnail.height}
-              title={profile.avatar.data.attributes.caption || null}
-              alt={profile.avatar.data.attributes.alternativeText || null}
+              src={`${process.env.API_URL}${profileData.avatar.data.attributes.url}`}
+              width={profileData.avatar.data.attributes.formats.thumbnail.width}
+              height={profileData.avatar.data.attributes.formats.thumbnail.height}
+              title={profileData.avatar.data.attributes.caption || null}
+              alt={profileData.avatar.data.attributes.alternativeText || null}
               className="w-[240px] absolute left-[50%] transform -translate-x-[50%] h-[240px] drop-shadow-xl mx-auto rounded-[20px] -mt-[140px] object-cover"
             />
             <div className="pt-[100px] pb-8">
               <h1 className="mt-6 mb-1 text-4xl font-semibold text-white">
-                {profile.title}
+                {profileData.title}
               </h1>
               <p className="mb-4 inline-block bg-[#1D1D1D] px-5 py-1.5 rounded-lg text-[#A6A6A6] ">
-                {profile.job}
+                {profileData.job}
               </p>
               <div className="flex justify-center space-x-3">
-                <Link href={profile.link_github} title="Github" target="_blank">
+                <Link href={profileData.link_github} title="Github" target="_blank">
                   <span className="socialbtn text-[#44566C] bg-[#1D1D1D]">
                     <FaGithub />
                   </span>
                 </Link>
 
-                <Link href={profile.link_gitlab} title="Gitlab" target="_blank">
+                <Link href={profileData.link_gitlab} title="Gitlab" target="_blank">
                   <span className="socialbtn text-[#E24428] bg-[#1D1D1D]">
                     <FaGitlab />
                   </span>
                 </Link>
 
                 <Link
-                  href={profile.link_linkedin}
+                  href={profileData.link_linkedin}
                   title="Linkedin"
                   target="_blank"
                 >
@@ -110,15 +74,15 @@ const ProfileCard = () => {
                   </span>
                 </Link>
 
-                {profile.link_drupal && (
-                  <Link href={profile.link_drupal} title="Drupal" target="_blank">
+                {profileData.link_drupal && (
+                  <Link href={profileData.link_drupal} title="Drupal" target="_blank">
                     <span className="socialbtn text-[#0578BE] bg-[#1D1D1D]">
                       <FaDrupal />
                     </span>
                   </Link>
                 )}
 
-                <Link href={profile.link_blog} title="Blog" target="_blank">
+                <Link href={profileData.link_blog} title="Blog" target="_blank">
                   <span className="socialbtn text-[#44566C] bg-[#1D1D1D]">
                     <FaWordpress />
                   </span>
@@ -135,11 +99,11 @@ const ProfileCard = () => {
                     </p>
                     <p className="text-white break-all">
                       <Link
-                        href={`tel:${profile.phone}`}
+                        href={`tel:${profileData.phone}`}
                         title="Téléphone"
                         className="hover:text-[#FA5252] duration-300 transition"
                       >
-                        {`${profile.phone}`}
+                        {`${profileData.phone}`}
                       </Link>
                     </p>
                   </div>
@@ -153,7 +117,7 @@ const ProfileCard = () => {
                       Location
                     </p>
                     <p className="text-white break-all">
-                      {profile.location}
+                      {profileData.location}
                     </p>
                   </div>
                 </div>
@@ -167,11 +131,11 @@ const ProfileCard = () => {
                     </p>
                     <p className="text-white break-all">
                       <Link
-                        href={`mailto:${profile.email}`}
+                        href={`mailto:${profileData.email}`}
                         title="Email"
                         className="hover:text-[#FA5252] duration-300 transition"
                       >
-                        {profile.email}
+                        {profileData.email}
                       </Link>
                     </p>
                   </div>
@@ -190,18 +154,18 @@ const ProfileCard = () => {
               </div>
               <Link
                 href={`${process.env.API_URL}${
-                  profile.resume && profile.resume.data.attributes.url
+                  profileData.resume && profileData.resume.data.attributes.url
                 }`}
                 title={
-                  (profile.resume && profile.resume.data.attributes.name) ||
+                  (profileData.resume && profileData.resume.data.attributes.name) ||
                   null
                 }
                 target="_blank"
-                type={profile.resume && profile.resume.data.attributes.mime}
+                type={profileData.resume && profileData.resume.data.attributes.mime}
                 className="inline-flex items-center mx-auto bg-gradient-to-r from-[#FA5252] to-[#DD2476] duration-200 transition ease-linear hover:animate-pulse px-8 py-3 text-lg text-white rounded-[35px] mt-6"
               >
                 <MdDownload className="mr-2" />
-                {(profile.resume && profile.resume.data.attributes.caption) ||
+                {(profileData.resume && profileData.resume.data.attributes.caption) ||
                   'null'}
               </Link>
             </div>

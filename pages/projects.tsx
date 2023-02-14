@@ -21,6 +21,7 @@ const inter = Inter({ subsets: ['latin'] });
 interface Props {
   data: any;
   error: any;
+  profileData: any;
 }
 
 interface Project {
@@ -46,7 +47,7 @@ interface Project {
   };
 }
 
-const Projects = ({ data, error }: Props) => {
+const Projects = ({ data, profileData }: Props) => {
   React.useEffect(() => {
     Modal.setAppElement('body');
   }, []);
@@ -110,7 +111,7 @@ const Projects = ({ data, error }: Props) => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      <Container>
+      <Container profileData={profileData}>
         <div className="container mb-8 px-4 sm:px-5 md:px-10 lg:px-[60px]">
           <div className="py-12">
             <h2 className="after-effect after:left-40">Projets</h2>
@@ -303,6 +304,12 @@ export const getStaticProps: GetStaticProps = async () => {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
     },
   });
+  const profile = await fetch(`${process.env.API_URL}/api/profile?populate=*`, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+  });
+  const profileData = await profile.json();
   const data = await res.json();
   const error = data.error || null;
 
@@ -310,6 +317,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       data,
       error,
+      profileData,
     },
   };
 };

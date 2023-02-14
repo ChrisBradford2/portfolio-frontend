@@ -6,6 +6,10 @@ import { MdCheckCircle, MdError } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
+interface Props {
+  profileData: any;
+}
+
 interface Inputs {
   firstName: string;
   lastName: string;
@@ -23,7 +27,7 @@ interface Status {
   };
 }
 
-export default function Contact() {
+export default function Contact({ profileData }: Props) {
   const [inputs, setInputs] = useState<Inputs>({
     firstName: '',
     lastName: '',
@@ -156,7 +160,7 @@ export default function Contact() {
         <meta name="robots" content="index, follow" />
       </Head>
       <ToastContainer />
-      <Container>
+      <Container profileData={profileData}>
         <div className="container px-4 sm:px-5 md:px-10 lg:px-14">
           <div className="py-12">
             <h2 className="after-effect after:left-44 mt-12 lg:mt-0 mb-12 md:mb-[30px]">
@@ -314,4 +318,19 @@ export default function Contact() {
       </Container>
     </>
   );
+}
+
+export const getStaticProps = async () => {
+  const profile = await fetch(`${process.env.API_URL}/api/profile?populate=*`, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+  });
+  const profileData = await profile.json();
+
+  return {
+    props: {
+      profileData,
+    },
+  };
 }

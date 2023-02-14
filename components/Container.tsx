@@ -6,9 +6,10 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 interface Props {
     children: React.ReactNode;
+    profileData: any;
 }
 
-const Container: React.FC<Props> = ({ children }) => {
+const Container: React.FC<Props> = ({ children, profileData }) => {
     React.useEffect(() => {
         AOS.init({
             duration: 1000,
@@ -20,7 +21,7 @@ const Container: React.FC<Props> = ({ children }) => {
     return (
       <main className="bg-homeBg min-h-screen bg-no-repeat bg-center bg-cover bg-fixed bg-dark md:pb-16 w-full">
       <div className="container mx-auto grid grid-cols-12 md:gap-10 justify-between lg:pt-[220px]">
-        <ProfileCard />
+        <ProfileCard profileData={profileData.data.attributes} />
         <div className="col-span-12 lg:col-span-8">
           <Navbar />
           <div className="lg:rounded-2xl bg-[#111111]">
