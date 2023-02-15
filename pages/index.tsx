@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
-import ProfileCard from '@/components/ProfileCard';
-import Navbar from '@/components/Navbar';
 import Body from '@/components/Body';
 import Container from '@/components/Container';
 
@@ -13,7 +11,7 @@ interface Props {
   body: any;
   school: any;
   professional_experience: any;
-  profile: any;
+  profileData: any;
   skills: any;
   seo: any;
 }
@@ -21,7 +19,7 @@ interface Props {
 const Home = ({
   data,
   body,
-  profile,
+  profileData,
   skills,
   seo,
 }: Props) => {
@@ -39,7 +37,7 @@ const Home = ({
         <meta name="robots" content={seo.metaRobots} />
       </Head>
 
-      <Container>
+      <Container profileData={profileData}>
         <Body body={body} skills={skills} skills_title={data.data.attributes.skills_title} />
       </Container>
     </>
@@ -47,12 +45,18 @@ const Home = ({
 };
 
 // Get data from Strapi with the token from the environment variable
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch(`${process.env.API_URL}/api/homepage?populate[]=seo&populate[]=body&populate[]=skills.languages`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
     },
   });
+  const profile = await fetch(`${process.env.API_URL}/api/profile?populate=*`, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+  });
+  const profileData = await profile.json();
   const data = await res.json();
   const error = data.error || null;
   const seo = data.data.attributes.seo;
@@ -66,6 +70,7 @@ export const getStaticProps = async () => {
       body,
       skills,
       seo,
+      profileData,
     },
   };
 };

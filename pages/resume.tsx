@@ -1,8 +1,5 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
-import ProfileCard from '@/components/ProfileCard';
-import Navbar from '@/components/Navbar';
-import { GetStaticProps } from 'next';
 import Education from '@/components/Education';
 import Experience from '@/components/Experience';
 import Container from '@/components/Container';
@@ -13,9 +10,10 @@ interface Props {
   data: any;
   error: any;
   seo: any;
+  profileData: any;
 }
 
-const Resume = ({ data, error, seo }: Props) => {
+const Resume = ({ data, seo, profileData }: Props) => {
   return (
     <>
       <Head>
@@ -30,7 +28,7 @@ const Resume = ({ data, error, seo }: Props) => {
         <meta name="robots" content={seo.metaRobots} />
       </Head>
 
-      <Container>
+      <Container profileData={profileData}>
         <div className="container px-4 sm:px-5 md:px-10 lg:px-14">
           <div className="py-12">
             <h2 className="after-effect after:left-44">
@@ -53,12 +51,18 @@ const Resume = ({ data, error, seo }: Props) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch(`${process.env.API_URL}/api/resume?populate=*`, {
     headers: {
       Authorization: `Bearer ${process.env.API_TOKEN}`,
     },
   });
+  const profile = await fetch(`${process.env.API_URL}/api/profile?populate=*`, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+  });
+  const profileData = await profile.json();
   const data = await res.json();
   const error = data.error || null;
   const education = data.data.attributes.education;
@@ -72,6 +76,7 @@ export const getStaticProps: GetStaticProps = async () => {
       education,
       experience,
       seo,
+      profileData,
     },
   };
 };
