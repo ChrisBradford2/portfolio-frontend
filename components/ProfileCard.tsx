@@ -9,7 +9,6 @@ import {
   MdEmail,
   MdCalendarToday,
   MdDownload,
-  MdCheckCircle,
 } from 'react-icons/md';
 import { FaLinkedin, FaGithub, FaGitlab, FaDrupal, FaWordpress } from 'react-icons/fa';
 
@@ -18,7 +17,6 @@ interface Props {
 }
 
 const ProfileCard = ({profileData}: Props) => {
-  const [birthday, setBirthday] = React.useState<any>(null);
 
   const getAge = (date: string) => {
     const today = new Date();
@@ -30,6 +28,8 @@ const ProfileCard = ({profileData}: Props) => {
     }
     return age;
   };
+
+  const birthday = getAge(profileData.birthday);
 
   return (
     <div className="col-span-12 lg:col-span-4 lg:h-screen lg:sticky top-44">
