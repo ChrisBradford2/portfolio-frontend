@@ -1,3 +1,4 @@
+import getMonth from '@/lib/getMonth';
 import { MdSchool } from 'react-icons/md';
 import getYear from '../lib/getYear';
 
@@ -19,8 +20,8 @@ const Education = ({ education, title }: Props) => {
       {education.map((school: any) => (
         <div className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg border-[#212425] border-2" key={school.id}>
           <div key={school.id}>
-            <span className="text-tiny text-[#b7b7b7]">
-              {getYear(school.start_date)} - {school.end_date ? getYear(school.end_date) : 'Present'}
+            <span className="text-tiny text-[#b7b7b7] capitalize">
+              {getMonth(school.start_date)} - {school.end_date ? getMonth(school.end_date) : 'Présent'}
             </span>
             <h3 className="text-lg font-semibold text-white">
               {school.grade_name}

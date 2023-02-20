@@ -189,7 +189,7 @@ const Projects = ({ data, profileData }: Props) => {
         contentLabel="Project Modal"
       >
         {selectedProject && (
-          <div className="w-full md:w-10/12 items-center lg:w-[850px] bg-white bg-[#323232] mx-auto rounded-xl p-4 md:p-8 absolute left-1/2 top-1/2 transform -translate-x-[50%] -translate-y-[50%] shadow-lg z-50 overflow-auto max-h-[90vh] no-scrollbar">
+          <div className="w-full md:w-10/12 items-center lg:w-[850px] bg-[#323232] mx-auto rounded-xl p-4 md:p-8 absolute left-1/2 top-1/2 transform -translate-x-[50%] -translate-y-[50%] shadow-lg z-50 overflow-auto max-h-[90vh] no-scrollbar">
             <button
               className="absolute top-4 right-4 text-[#FA5252] hover:text-[#FA5252] text-2xl font-bold"
               onClick={closeModal}

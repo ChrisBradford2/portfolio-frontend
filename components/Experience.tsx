@@ -1,5 +1,6 @@
+import getMonth from '@/lib/getMonth';
+import HTMLReactParser from 'html-react-parser';
 import { MdWork, } from 'react-icons/md';
-import getYear from '../lib/getYear';
 
 interface Props {
   experience: any;
@@ -18,8 +19,8 @@ const Experience = ({ experience, title }: Props) => {
       <div className="py-4 pl-5 pr-3 space-y-2 mb-6 rounded-lg border-[#212425] border-2">
         {experience.map((company: any) => (
           <div key={company.id}>
-            <span className="text-tiny text-[#b7b7b7]">
-              {getYear(company.start_date)} - {company.end_date ? getYear(company.end_date) : 'Present'}
+            <span className="text-tiny text-[#b7b7b7] capitalize">
+              {getMonth(company.start_date)} - {company.end_date ? getMonth(company.end_date) : 'Présent'}
             </span>
             <h3 className="text-lg font-semibold text-white">
                 {company.job}
