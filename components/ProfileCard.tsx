@@ -37,7 +37,7 @@ const ProfileCard = ({profileData}: Props) => {
           <>
             <Image
               priority
-              src={`${process.env.API_URL}${profileData.avatar.data.attributes.url}`}
+              src={profileData.avatar.data.attributes.url}
               width={profileData.avatar.data.attributes.formats.thumbnail.width}
               height={profileData.avatar.data.attributes.formats.thumbnail.height}
               title={profileData.avatar.data.attributes.caption || null}

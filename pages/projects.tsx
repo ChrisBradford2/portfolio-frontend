@@ -147,7 +147,7 @@ const Projects = ({ data, profileData }: Props) => {
                     <div className="overflow-hidden rounded-lg">
                     <Image
                         className="object-cover object-center w-full cursor-pointer transition duration-200 ease-in-out transform hover:scale-110 rounded-lg h-auto"
-                        src={`${process.env.API_URL}${project.attributes.media.data.attributes.url}`}
+                        src={project.attributes.media.data.attributes.url}
                         alt={project.attributes.media.data.attributes.alternativeText}
                         onClick={() => openModal(project)}
                         width={500}
@@ -283,7 +283,7 @@ const Projects = ({ data, profileData }: Props) => {
                 {HTMLReactParser(selectedProject.attributes.body)}
               </div>
               <Image
-                src={`${process.env.API_URL}${selectedProject.attributes.media.data.attributes.url}`}
+                src={selectedProject.attributes.media.data.attributes.url}
                 alt="content"
                 width={620}
                 height={420}
