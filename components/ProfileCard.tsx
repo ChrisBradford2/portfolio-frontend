@@ -153,9 +153,7 @@ const ProfileCard = ({profileData}: Props) => {
                 </div>
               </div>
               <Link
-                href={`${process.env.API_URL}${
-                  profileData.resume && profileData.resume.data.attributes.url
-                }`}
+                href={profileData.resume.data.attributes.url}
                 title={
                   (profileData.resume && profileData.resume.data.attributes.name) ||
                   null
