@@ -4,7 +4,8 @@ const nextConfig = {
   images: {
     domains: [
       'localhost',
-      'nicolas-barbarisi-backend.herokuapp.com'
+      'nicolas-barbarisi-backend.herokuapp.com',
+      'res.cloudinary.com'
     ],
   },
   env: {
